@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Follow App</string>
+    <string name="esame_inserito_toast">ESAME INSERITO</string>
 </resources>

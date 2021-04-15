@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExamInsertion">
+
+    <Button
+        android:id="@+id/salvaB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SALVA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-16dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tVTitolo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Iinserire dati esame"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="109dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Nome Esame"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/eTNomeEsame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="inserire nome esame"
+                android:inputType="textPersonName"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/dataB"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="DATA" />
+
+        <TextView
+            android:id="@+id/tVData"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/oraB"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="ORA" />
+
+        <TextView
+            android:id="@+id/tVOra"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/alertsB"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="NOTIFICA" />
+
+        <EditText
+            android:id="@+id/tVID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
