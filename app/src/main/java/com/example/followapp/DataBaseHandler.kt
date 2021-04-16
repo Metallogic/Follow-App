@@ -20,35 +20,37 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private val COLUMN_NAME_NOMESAME = "nomeEsame"
         private val COLUMN_NAME_DATA = "dataEsame"
         private val COLUMN_NAME_ORA = "oraEsame"
-    }
-
-    override fun onCreate(db: SQLiteDatabase?) {
-        //creazione tabella con campi
-        val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
+        private val SQL_CreazioneTabella = ("CREATE TABLE " + TABLE_NAME + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_NAME_NOMESAME + " TEXT,"
                 + COLUMN_NAME_DATA + " TEXT" + COLUMN_NAME_ORA + " TEXT" + ")")
-        db?.execSQL(CREATE_CONTACTS_TABLE)
+        private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
+        private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME")
+    }
+    override fun onCreate(db: SQLiteDatabase?) {
+        //creazione tabella con campi
+        db?.execSQL(SQL_CreazioneTabella)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db!!.execSQL(SQL_DropTable)
         onCreate(db)
     }
 
     // -- Funzione per inserire i dati nel DB--
 
+    val dbHelper = DatabaseHandler(context)
+
     fun addExam(exam: modelExam): Long {
         val db = this.writableDatabase
 
-        val contentValues = ContentValues()
-        contentValues.put(DatabaseHandler.COLUMN_ID, exam.id)
-        contentValues.put(DatabaseHandler.COLUMN_NAME_NOMESAME, exam.nomeEsame)
-        contentValues.put(DatabaseHandler.COLUMN_NAME_DATA, exam.dataEsame)
-        contentValues.put(DatabaseHandler.COLUMN_NAME_ORA, exam.oraEsame)
+        val valoriRow = ContentValues().apply {
+            put(COLUMN_ID, exam.id)
+            put(COLUMN_NAME_NOMESAME, exam.nomeEsame)
+            put(COLUMN_NAME_DATA, exam.dataEsame)
+            put(COLUMN_NAME_ORA, exam.oraEsame)
+        }
 
-
-        val success = db.insert(TABLE_NAME, null, contentValues)
-
+        val success = db.insert(TABLE_NAME, null, valoriRow)
 
         db.close() // Chiusura connessione database
         return success
@@ -60,7 +62,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         val examList: ArrayList<modelExam> = ArrayList<modelExam>()
 
         // Query per selezionare tutti i record dalla tabella
-        val selectQuery = "SELECT  * FROM $TABLE_NAME"
+        val selectQuery = SQL_selezionaDati
 
         val db = this.readableDatabase
         // Il cursore è usato per leggere i record uno alla volta e aggiungere questi nella classe modello

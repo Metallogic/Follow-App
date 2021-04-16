@@ -72,13 +72,6 @@ class ExamInsertion : AppCompatActivity() {
 
         }
 
-        // -- GESTIONE ID BUTTON --
-
-        //Crezione EditTExt e inizializzazione per inserimento ora
-        var idTextView = findViewById<EditText>(R.id.tVID)
-
-
-
         // -- GESTIONE SALVATAGGIO --
 
         //Crezione bottone e inizializzazione bottone salvaB
@@ -141,7 +134,6 @@ class ExamInsertion : AppCompatActivity() {
                         dialog.dismiss()
                     }
                 }
-
                 messaggioAllerta.show()
             }
             //Inserimento dati nel DB e Toast di avvenuto inserimento esame
