@@ -50,10 +50,10 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             put(COLUMN_NAME_ORA, exam.oraEsame)
         }
 
-        val success = db.insert(TABLE_NAME, null, valoriRow)
+        val success = db?.insert(TABLE_NAME, null, valoriRow)
 
         db.close() // Chiusura connessione database
-        return success
+        return success!!
     }
 
     // -- Funzione per leggere i dati dal DB in sottoforma di ArrayList
