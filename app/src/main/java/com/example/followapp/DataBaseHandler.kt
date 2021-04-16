@@ -38,8 +38,6 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     // -- Funzione per inserire i dati nel DB--
 
-    val dbHelper = DatabaseHandler(context)
-
     fun addExam(exam: modelExam): Long {
         val db = this.writableDatabase
 
