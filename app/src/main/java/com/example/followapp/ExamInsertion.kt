@@ -27,25 +27,26 @@ class ExamInsertion : AppCompatActivity() {
 
         // -- GESTIONE CALENDARIO --
 
+        //Crezione val per textView e inizializzazione per inserimento data
+        var tVDaTa = findViewById<TextView>(R.id.tVData)
+
         //Calendario scelta data
         val calendario = Calendar.getInstance()
         val year = calendario.get(Calendar.YEAR)
         val month = calendario.get(Calendar.MONTH)
         val day = calendario.get(Calendar.DAY_OF_MONTH)
 
-        //Crezione val per textView e inizializzazione per inserimento data
-        var tVDaTa = findViewById<TextView>(R.id.tVData)
-
         //Crezione bottone e inizializzazione per inserimento data
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
             val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                tVDaTa.setText("" + mDayOfMonth + "-" + mMonth + "-" + mYear)
+                tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
             }, year, month, day)
 
             dataCalendario.show()
         }
+
 
         // -- GESTIONE OROLOGIO --
 
@@ -58,7 +59,7 @@ class ExamInsertion : AppCompatActivity() {
         //Crezione bottone e inizializzazione per inserimento ora
         var oraButton = findViewById<Button>(R.id.oraB)
 
-        //Evento click oraB in cui viene aperto il calendario
+        //Evento click oraB in cui viene aperto l'orologio
         oraButton.setOnClickListener {
             val oraCalendario = TimePickerDialog.OnTimeSetListener { TimePicker, mHour, mMinute ->
                 orologio.set(Calendar.HOUR_OF_DAY, mHour)

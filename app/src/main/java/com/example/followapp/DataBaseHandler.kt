@@ -26,7 +26,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
         private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME")
     }
-    override fun onCreate(db: SQLiteDatabase?) {
+    override fun onCreate(db: SQLiteDatabase) {
         //creazione tabella con campi
         db?.execSQL(SQL_CreazioneTabella)
     }
@@ -49,7 +49,6 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         }
 
         val success = db.insert(TABLE_NAME, null, valoriRow)
-
         db.close() // Chiusura connessione database
         return success
     }
