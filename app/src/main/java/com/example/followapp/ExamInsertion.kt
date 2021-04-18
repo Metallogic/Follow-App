@@ -20,12 +20,16 @@ class ExamInsertion : AppCompatActivity() {
         setContentView(R.layout.activity_exam_insertion)
 
 
-        // -- GESTIONE NOME ESAME --
+        /**
+         * -- GESTIONE NOME ESAME --
+         */
 
         var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsame)
 
 
-        // -- GESTIONE CALENDARIO --
+        /**
+         * -- GESTIONE CALENDARIO --
+         */
 
         //Crezione val per textView e inizializzazione per inserimento data
         var tVDaTa = findViewById<TextView>(R.id.tVData)
@@ -48,7 +52,9 @@ class ExamInsertion : AppCompatActivity() {
         }
 
 
-        // -- GESTIONE OROLOGIO --
+        /**
+         * -- GESTIONE OROLOGIO --
+         */
 
         //Orologio scelta ora
         val orologio = Calendar.getInstance()
@@ -73,7 +79,9 @@ class ExamInsertion : AppCompatActivity() {
 
         }
 
-        // -- GESTIONE SALVATAGGIO --
+        /**
+         * -- GESTIONE SALVATAGGIO --
+         */
 
         //Crezione bottone e inizializzazione bottone salvaB
         var salvataggioButton = findViewById<Button>(R.id.salvaB)
@@ -148,7 +156,10 @@ class ExamInsertion : AppCompatActivity() {
     }
 
 
-    // -- Funzione per salvare i record degli esami nel DB --
+    /**
+     * Funzione per salvare i record degli esami nel DB.
+     */
+
     private fun aggiungiRecord() {
         var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsame)
         val nomeE = eTNomeEsame.text.toString()
@@ -160,7 +171,7 @@ class ExamInsertion : AppCompatActivity() {
         val oraE = tVOra.text.toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val status = databaseHandler.addExam(modelExam(0, nomeE, dataE,oraE))
+        val status = databaseHandler.addExam(modelExam(nomeE, dataE,oraE))
         if (status > -1) {
             Toast.makeText(applicationContext, R.string.esame_inserito_toast, Toast.LENGTH_LONG).show()
         }
