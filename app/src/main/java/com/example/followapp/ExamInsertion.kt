@@ -44,11 +44,16 @@ class ExamInsertion : AppCompatActivity() {
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
-            val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
-            }, year, month, day)
+            //do{
+                val sdf = SimpleDateFormat("dd/M/yyyy")
+                val currentDate = sdf.format(Date())
+                val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+                    tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
+                }, year, month, day)
 
-            dataCalendario.show()
+                dataCalendario.show()
+           // } while (data passata? e si allora reinserire data esame)
+
         }
 
 
@@ -154,7 +159,6 @@ class ExamInsertion : AppCompatActivity() {
             }
         }
     }
-
 
     /**
      * Funzione per salvare i record degli esami nel DB.

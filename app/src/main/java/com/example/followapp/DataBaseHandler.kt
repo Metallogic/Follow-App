@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
 
 /**
@@ -60,11 +61,40 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
      * Funzione per leggere i dati dal DB sottoforma di ArrayList.
      */
 
-    fun vistaEsami() {
+    fun vistaEsami(context: Context): ArrayList<modelExam> {
 
+        val query = SQL_selezionaDati
+        val db = this.readableDatabase
+        var cursore: Cursor? = null
+        val listaEsami = ArrayList<modelExam>()
 
+        try {
+            cursore = db.rawQuery(query, null)
+        }
+        catch (e: SQLiteException) {
+            db.execSQL(query)
+            return ArrayList()
+        }
+
+        var nomeE: String
+        var dataE: String
+        var oraE: String
+
+        if (cursore.moveToFirst()) {
+            do {
+                nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
+                dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
+                oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
+
+                val exam = modelExam(nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                listaEsami.add(exam)
+
+            } while (cursore.moveToNext())
+        }
+        cursore.close()
+        db.close()
+        return listaEsami
     }
-
 
 
 }
