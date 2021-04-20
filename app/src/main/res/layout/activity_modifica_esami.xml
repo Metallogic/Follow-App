@@ -6,34 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".ExamInsertion">
 
-    <Button
-        android:id="@+id/salvaB"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FF8BDF36"
-        android:text="SALVA"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/salvaB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8BDF36"
+            android:text="SALVA MODIFICHE"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:weightSum="1" />
+
+        <Button
+            android:id="@+id/deleteB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF2B1B"
+            android:text="CANCELLA"
+            android:textSize="24sp"
+            android:weightSum="1" />
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="72dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-16dp"
-        android:weightSum="2">
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tVTitolo"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="Inserire dati esame"
             android:textAlignment="center"
+            android:textColor="#000000"
             android:textSize="30sp" />
 
         <TextView
@@ -79,7 +98,7 @@
         <TextView
             android:id="@+id/tVDataM"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="22sp" />
 
@@ -93,7 +112,7 @@
         <TextView
             android:id="@+id/tVOraM"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="22sp" />
 

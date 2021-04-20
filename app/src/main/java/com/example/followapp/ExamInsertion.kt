@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import java.text.SimpleDateFormat
@@ -24,7 +23,7 @@ class ExamInsertion : AppCompatActivity() {
          * -- GESTIONE NOME ESAME --
          */
 
-        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsame)
+        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
 
 
         /**
@@ -32,7 +31,7 @@ class ExamInsertion : AppCompatActivity() {
          */
 
         //Crezione val per textView e inizializzazione per inserimento data
-        var tVDaTa = findViewById<TextView>(R.id.tVData)
+        var tVDaTa = findViewById<TextView>(R.id.tVDataM)
 
         //Calendario scelta data
         val calendario = Calendar.getInstance()
@@ -65,7 +64,7 @@ class ExamInsertion : AppCompatActivity() {
         val orologio = Calendar.getInstance()
 
         //Crezione val per textView e inizializzazione per inserimento ora
-        val tVOrA = findViewById<TextView>(R.id.tVOra)
+        val tVOrA = findViewById<TextView>(R.id.tVOraM)
 
         //Crezione bottone e inizializzazione per inserimento ora
         var oraButton = findViewById<Button>(R.id.oraB)
@@ -165,13 +164,13 @@ class ExamInsertion : AppCompatActivity() {
      */
 
     private fun aggiungiRecord() {
-        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsame)
+        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
         val nomeE = eTNomeEsame.text.toString()
 
-        var tVDaTa = findViewById<TextView>(R.id.tVData)
+        var tVDaTa = findViewById<TextView>(R.id.tVDataM)
         val dataE = tVDaTa.text.toString()
 
-        var tVOra = findViewById<TextView>(R.id.tVOra)
+        var tVOra = findViewById<TextView>(R.id.tVOraM)
         val oraE = tVOra.text.toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
