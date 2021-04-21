@@ -3,17 +3,21 @@ package com.example.followapp
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 
 class ExamInsertion : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exam_insertion)
@@ -44,15 +48,14 @@ class ExamInsertion : AppCompatActivity() {
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
             //do{
-                val sdf = SimpleDateFormat("dd/M/yyyy")
-                val currentDate = sdf.format(Date())
+                val sdf = SimpleDateFormat("dd-M-yyyy")
+                val currentDate = LocalDateTime.now()
                 val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                    tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
+                    tVDaTa.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
                 }, year, month, day)
 
                 dataCalendario.show()
            // } while (data passata? e si allora reinserire data esame)
-
         }
 
 

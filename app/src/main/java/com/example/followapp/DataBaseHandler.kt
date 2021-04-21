@@ -6,7 +6,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
+import android.os.Build
+import kotlin.collections.ArrayList
 
 
 /**
@@ -27,7 +28,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_NOMESAME + " TEXT, "
                 + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
-        private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME")
+        private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
     }
     override fun onCreate(db: SQLiteDatabase?) {
         //creazione tabella con campi
