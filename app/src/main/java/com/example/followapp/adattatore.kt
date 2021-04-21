@@ -1,6 +1,6 @@
 package com.example.followapp
 
-import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +11,31 @@ import androidx.recyclerview.widget.RecyclerView
 
 class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAdapter.ViewHolder>(){
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    companion object{
+        val ID_ESAME = "COLUMN_ID"
+        val NOME_ESAME = "COLUMN_NAME_NOMESAME"
+        val DATA_ESAME = "COLUMN_NAME_DATA"
+        val ORA_ESAME ="COLUMN_NAME_ORA"
+    }
+
+    class ViewHolder(itemView: View, ): RecyclerView.ViewHolder(itemView){
         val tVnomeEsame: TextView
         val tVdataEsame: TextView
         val iVmodifyB : ImageButton
 
-        init{
+        //Inizializzazione
+        init {
+            //Inizializzazione itemView: TextView e Botton
             tVnomeEsame = itemView.findViewById(R.id.tVnomeEsameRow)
             tVdataEsame = itemView.findViewById(R.id.tVdataEsameRow)
             iVmodifyB = itemView.findViewById(R.id.modifyB)
+
+            //Inizializzazione click sul bottone di modifica
+            iVmodifyB.setOnClickListener {
+                val intent = Intent(itemView.context, ModificaEsami::class.java)
+
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
@@ -40,6 +56,5 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
         p0.tVnomeEsame.text = esame.nomeEsame
         p0.tVdataEsame.text = esame.dataEsame
     }
-
 
 }

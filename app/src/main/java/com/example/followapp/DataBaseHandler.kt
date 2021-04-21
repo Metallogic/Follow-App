@@ -76,12 +76,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
             return ArrayList()
         }
 
+        var idE: Int
         var nomeE: String
         var dataE: String
         var oraE: String
 
         if (cursore.moveToFirst()) {
             do {
+                idE = cursore.getInt(cursore.getColumnIndex(COLUMN_ID))
                 nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))

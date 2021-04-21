@@ -39,17 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-        /*
-        //Crezione bottone e inizializzazione modifyB
-        val moficicaEsame = findViewById<ImageButton>(R.id.modifyB)
-        //Evento click modifyB in cui apro l'activity per modificare l'esame
-        moficicaEsame.setOnClickListener {
-            val intent = Intent(this, ModificaEsami::class.java)
-            startActivity(intent)
-        }
-        */
-
     }
 
     /**
@@ -65,57 +54,5 @@ class MainActivity : AppCompatActivity() {
         rVlistaEsami.adapter = adattatore
 
     }
-/*
-    /**
-    * Funzione usata per modificare gli esami inseriti.
-    */
-    fun updateRecord(modelloEsame: modelExam) {
-        val updateDialog = Dialog(this, R.style.Theme_Dialog)
-        updateDialog.setCancelable(false)
 
-        val eTnomeE = findViewById<EditText>(R.id.eTNomeEsameM)
-        val tVdatE = findViewById<TextView>(R.id.tVDataM)
-        val tVoraE = findViewById<TextView>(R.id.tVOraM)
-
-
-        updateDialog.set
-        etContentView(R.layout.activity_modifica_esami)
-
-        updateDialog.etUpdateEmailId.setText(modelloEsame.nomeEsame)
-        updateDialog.eTnomeE.setText(modelloEsame.dataEsame)
-        updateDialog.eTnomeE.setText(modelloEsame.oraEsame)
-
-
-        updateDialog.tvUpdate.setOnClickListener(View.OnClickListener {
-
-            val name = updateDialog.etUpdateName.text.toString()
-            val email = updateDialog.etUpdateEmailId.text.toString()
-
-            val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-
-            if (!name.isEmpty() && !email.isEmpty()) {
-                val status =
-                    databaseHandler.updateEmployee(EmpModelClass(empModelClass.id, name, email))
-                if (status > -1) {
-                    Toast.makeText(applicationContext, "Record Updated.", Toast.LENGTH_LONG).show()
-
-                    setupListofDataIntoRecyclerView()
-
-                    updateDialog.dismiss() // Dialog will be dismissed
-                }
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "Name or Email cannot be blank",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })
-        updateDialog.tvCancel.setOnClickListener(View.OnClickListener {
-            updateDialog.dismiss()
-        })
-        //Start the dialog and display it on screen.
-        updateDialog.show()
-    }
-    */
 }
