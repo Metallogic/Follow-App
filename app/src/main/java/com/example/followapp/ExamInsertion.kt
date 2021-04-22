@@ -48,9 +48,7 @@ class ExamInsertion : AppCompatActivity() {
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
             //do{
-                val sdf = SimpleDateFormat("dd-M-yyyy")
-                val currentDate = LocalDateTime.now()
-                val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+                               val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
                     tVDaTa.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
                 }, year, month, day)
 

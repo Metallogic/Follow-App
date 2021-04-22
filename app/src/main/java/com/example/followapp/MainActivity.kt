@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,15 +30,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ExamInsertion::class.java)
             startActivity(intent)
         }
+    }
 
-        //Crezione bottone e inizializzazione refreshB
-        val RefreshButton = findViewById<Button>(R.id.refreshB)
-        //Evento click refreshB in cui si aggiorna la lista degli esami
-        RefreshButton.setOnClickListener {
-            viewExam()
-        }
-
-
+    /**
+     * Funzione che nella fase onResume aggiorna la lista degli esami inseriti
+     */
+    override fun onResume() {
+        super.onResume()
+        viewExam()
     }
 
     /**
