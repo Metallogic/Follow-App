@@ -29,6 +29,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
         private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
+        private val SQL_selezionaNomeEsame= ("SELECT $COLUMN_NAME_NOMESAME FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
+        private val SQL_selezionaDataEsame= ("SELECT $COLUMN_NAME_DATA FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
+        private val SQL_selezionaOraEsame= ("SELECT $COLUMN_NAME_ORA FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
     }
     override fun onCreate(db: SQLiteDatabase?) {
         //creazione tabella con campi
@@ -89,7 +92,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
 
-                val exam = modelExam(nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                val exam = modelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
                 listaEsami.add(exam)
 
             } while (cursore.moveToNext())
@@ -101,3 +104,4 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
 
 
 }
+

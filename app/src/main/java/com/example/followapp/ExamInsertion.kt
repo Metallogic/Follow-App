@@ -175,7 +175,7 @@ class ExamInsertion : AppCompatActivity() {
         val oraE = tVOra.text.toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val status = databaseHandler.addExam(modelExam(nomeE, dataE,oraE))
+        val status = databaseHandler.addExam(modelExam(null, nomeE, dataE,oraE))
         if (status > -1) {
             Toast.makeText(applicationContext, R.string.esame_inserito_toast, Toast.LENGTH_LONG).show()
         }

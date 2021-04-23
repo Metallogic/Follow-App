@@ -18,7 +18,7 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
         val ORA_ESAME ="COLUMN_NAME_ORA"
     }
 
-    class ViewHolder(itemView: View, ): RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View, var esame: modelExam? =null): RecyclerView.ViewHolder(itemView){
         val tVnomeEsame: TextView
         val tVdataEsame: TextView
         val iVmodifyB : ImageButton
@@ -33,7 +33,10 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
             //Inizializzazione click sul bottone di modifica
             iVmodifyB.setOnClickListener {
                 val intent = Intent(itemView.context, ModificaEsami::class.java)
-
+                intent.putExtra(ID_ESAME, esame?.id)
+                intent.putExtra(NOME_ESAME, esame?.nomeEsame)
+                intent.putExtra(DATA_ESAME, esame?.dataEsame)
+                intent.putExtra(ORA_ESAME, esame?.oraEsame)
                 itemView.context.startActivity(intent)
             }
         }
