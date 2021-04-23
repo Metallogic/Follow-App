@@ -34,7 +34,7 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
             iVmodifyB.setOnClickListener {
                 val intent = Intent(itemView.context, ModificaEsami::class.java)
                 intent.putExtra(ID_ESAME, esame?.id)
-                intent.putExtra(NOME_ESAME, esame?.nomeEsame)
+                intent.putExtra(NOME_ESAME,z)
                 intent.putExtra(DATA_ESAME, esame?.dataEsame)
                 intent.putExtra(ORA_ESAME, esame?.oraEsame)
                 itemView.context.startActivity(intent)

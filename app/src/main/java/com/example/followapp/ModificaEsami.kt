@@ -1,11 +1,12 @@
 package com.example.followapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+
 
 class ModificaEsami : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +23,8 @@ class ModificaEsami : AppCompatActivity() {
         //Variabili passati dall'intent
         val idEsame = intent.getIntExtra(examAdapter.ID_ESAME, -1)
         val nomeEsame = intent.getStringExtra(examAdapter.NOME_ESAME).toString()
-        val dataEsame = intent.getStringArrayExtra(examAdapter.DATA_ESAME).toString()
-        val oraEsame = intent.getStringArrayExtra(examAdapter.ORA_ESAME).toString()
+        val dataEsame = intent.getStringExtra(examAdapter.DATA_ESAME).toString()
+        val oraEsame = intent.getStringExtra(examAdapter.ORA_ESAME).toString()
 
         nomeE.setText(nomeEsame)
         dataE.setText(dataEsame)
