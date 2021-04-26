@@ -1,5 +1,6 @@
 package com.example.followapp
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAdapter.ViewHolder>(){
+class examAdapter (val exam: ArrayList<modelExam>, val context: Context): RecyclerView.Adapter<examAdapter.ViewHolder>(){
 
     companion object{
         val ID_ESAME = "COLUMN_ID"
@@ -21,24 +22,14 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
     class ViewHolder(itemView: View, var esame: modelExam? =null): RecyclerView.ViewHolder(itemView){
         val tVnomeEsame: TextView
         val tVdataEsame: TextView
-        val iVmodifyB : ImageButton
+        val tVoraEsame: TextView
 
         //Inizializzazione
         init {
             //Inizializzazione itemView: TextView e Botton
             tVnomeEsame = itemView.findViewById(R.id.tVnomeEsameRow)
             tVdataEsame = itemView.findViewById(R.id.tVdataEsameRow)
-            iVmodifyB = itemView.findViewById(R.id.modifyB)
-
-            //Inizializzazione click sul bottone di modifica
-            iVmodifyB.setOnClickListener {
-                val intent = Intent(itemView.context, ModificaEsami::class.java)
-                intent.putExtra(ID_ESAME, esame?.id)
-                intent.putExtra(NOME_ESAME, esame?.nomeEsame)
-                intent.putExtra(DATA_ESAME, esame?.dataEsame)
-                intent.putExtra(ORA_ESAME, esame?.oraEsame)
-                itemView.context.startActivity(intent)
-            }
+            tVoraEsame = itemView.findViewById(R.id.tVoraEsameRow)
         }
     }
 
@@ -54,10 +45,32 @@ class examAdapter (val exam: ArrayList<modelExam>): RecyclerView.Adapter<examAda
 
     }
 
-    override fun onBindViewHolder(p0:examAdapter.ViewHolder, p1: Int) {
-        val esame: modelExam = exam[p1]
-        p0.tVnomeEsame.text = esame.nomeEsame
-        p0.tVdataEsame.text = esame.dataEsame
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val esame: modelExam = exam[position]
+        holder.tVnomeEsame.text = esame.nomeEsame
+        holder.tVdataEsame.text = esame.dataEsame
+        holder.tVoraEsame.text = esame.oraEsame
+
+        //Al click dell'oggetto esame vengono passati i valori tramite intent all'activity MpdificaEsami.kt
+        holder.itemView.setOnClickListener {
+            val modello = exam.get(position)
+            //Inizializzazione valori da passare
+            var getID: Int? = modello.id
+            var getNomeEsame: String? = modello.nomeEsame
+            var getDataEsame: String? = modello.dataEsame
+            var getOraEsame: String? = modello.oraEsame
+
+            val intent = Intent(context, ModificaEsami::class.java)
+            //Passaggio valori
+            intent.putExtra(ID_ESAME, getID)
+            intent.putExtra(NOME_ESAME,getNomeEsame)
+            intent.putExtra(DATA_ESAME, getDataEsame)
+            intent.putExtra(ORA_ESAME, getOraEsame)
+
+            context.startActivity(intent)
+        }
+
+        }
+
 
 }

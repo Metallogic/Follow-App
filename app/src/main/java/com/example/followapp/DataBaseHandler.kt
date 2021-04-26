@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import kotlin.collections.ArrayList
 
 
@@ -29,9 +31,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
         private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
-        private val SQL_selezionaNomeEsame= ("SELECT $COLUMN_NAME_NOMESAME FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
-        private val SQL_selezionaDataEsame= ("SELECT $COLUMN_NAME_DATA FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
-        private val SQL_selezionaOraEsame= ("SELECT $COLUMN_NAME_ORA FROM $TABLE_NAME WHERE $COLUMN_ID IS ")
     }
     override fun onCreate(db: SQLiteDatabase?) {
         //creazione tabella con campi
@@ -100,6 +99,52 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         cursore.close()
         db.close()
         return listaEsami
+    }
+
+    /**
+    * Funzione per aggiornare i dati nel DB
+    */
+    fun updateExam(idEsame: Int, nomeEsame:String, dataEsame:String, oraEsame:String): Int{
+        val db = this.writableDatabase
+        val valoriRow = ContentValues()
+        val success: Int
+
+        //Aggiunta al ContentValues i valori da inserire nel DB per aggiornare riga tramite ID
+        valoriRow.put(COLUMN_NAME_NOMESAME, nomeEsame) // ModelExam nome Esame
+        valoriRow.put(COLUMN_NAME_DATA, dataEsame) // ModelExam data Esame
+        valoriRow.put(COLUMN_NAME_ORA, oraEsame) // ModelExam ora Esame
+
+       try {
+            // Aggiornamento riga
+            success = db.update(TABLE_NAME, valoriRow, COLUMN_ID + " = " + idEsame, null)
+            // Chiusura connessione DB
+            db.close()
+            return success
+       }
+       catch (e: Exception){
+            // Chiusura connessione DB
+            db.close()
+            return -1
+       }
+    }
+
+    /**
+     * Funzione per eliminare i dati nel DB
+     */
+    fun deleteExam(idEsame: Int): Int {
+        val db = this.writableDatabase
+        try {
+            // eliminazione dati
+            val success = db.delete(TABLE_NAME, COLUMN_ID + " = " + idEsame, null)
+            // Chiusura connessione DB
+            db.close()
+            return success
+        }
+        catch (e: Exception){
+            // Chiusura connessione DB
+            db.close()
+            return -1
+        }
     }
 
 

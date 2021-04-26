@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="stile_schermata_caricamento_app" parent="ThemeOverlay.AppCompat.Dialog">
+    <style name="stile_schermata_caricamento_app" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
     </style>

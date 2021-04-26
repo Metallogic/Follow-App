@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private fun viewExam() {
 
         var listaEsami = dbHandler.vistaEsami(this)
-        val adattatore = examAdapter(listaEsami)
+        val adattatore = examAdapter(listaEsami, this)
         var rVlistaEsami = findViewById<RecyclerView>(R.id.rVDatiEsami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
