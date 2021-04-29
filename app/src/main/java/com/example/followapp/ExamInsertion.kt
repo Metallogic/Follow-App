@@ -77,72 +77,26 @@ class ExamInsertion : AppCompatActivity() {
          */
         //Crezione bottone e inizializzazione bottone salvaB
         var salvataggioButton = findViewById<Button>(R.id.salvaB)
-
-        // Creazione messaggio allerta se dati non inseriti
         //Evento click salvaB in cui vengono salvati i dati inserite dall'utente
         salvataggioButton.setOnClickListener {
-            //Controllo dati inseriti, se incompleti messagio di errore, altrimenti toast di salvataggio andato a buon fine
-            if (TextUtils.isEmpty(tVDaTa.getText().toString()) || TextUtils.isEmpty(tVOrA.getText().toString()) || TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                val messaggioAllerta = AlertDialog.Builder(this@ExamInsertion)
-                messaggioAllerta.setTitle("ATTENZIONE")
-                if (TextUtils.isEmpty(tVDaTa.getText().toString()) and !TextUtils.isEmpty(tVOrA.getText().toString()) and !TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire data esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                if (TextUtils.isEmpty(tVDaTa.getText().toString()) and TextUtils.isEmpty(tVOrA.getText().toString()) and !TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire data e ora esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                if (TextUtils.isEmpty(tVDaTa.getText().toString()) and TextUtils.isEmpty(tVOrA.getText().toString()) and TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire nome, data e ora esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                if (!TextUtils.isEmpty(tVDaTa.getText().toString()) and !TextUtils.isEmpty(tVOrA.getText().toString()) and TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire nome esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                if (TextUtils.isEmpty(tVOrA.getText().toString()) and !TextUtils.isEmpty(tVDaTa.getText().toString()) and !TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire ora esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                if (!TextUtils.isEmpty(tVDaTa.getText().toString()) and TextUtils.isEmpty(tVOrA.getText().toString()) and TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire nome e ora esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-
-                if (TextUtils.isEmpty(tVDaTa.getText().toString()) and !TextUtils.isEmpty(tVOrA.getText().toString()) and TextUtils.isEmpty(eTNomeEsame.getText().toString())) {
-                    messaggioAllerta.setMessage("Dati inseriti incompleti!")
-                    messaggioAllerta.setMessage("Inserire nome e data esame")
-                    messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                        dialog.dismiss()
-                    }
-                }
-                messaggioAllerta.show()
+            // Creazione messaggio allerta se dati non inseriti
+            val messaggioAllerta = AlertDialog.Builder(this@ExamInsertion)
+            messaggioAllerta.setTitle("ATTENZIONE")
+            messaggioAllerta.setMessage("Dati inseriti incompleti!")
+            messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
+                dialog.dismiss()
             }
+            //Controllo dati inseriti, se incompleti messagio di errore, altrimenti toast di salvataggio andato a buon fine
+            val msg= checkDati(eTNomeEsame.getText().toString(),tVDaTa.getText().toString(),tVOrA.getText().toString(),)
             //Inserimento dati nel DB e Toast di avvenuto inserimento esame
-            else {
+            if(msg.equals("OK")){
                 aggiungiRecord()
                 //Chiusura activity
                 finish()
-
+            }
+            else {
+                messaggioAllerta.setMessage(msg)
+                messaggioAllerta.show()
             }
         }
     }
@@ -164,6 +118,36 @@ class ExamInsertion : AppCompatActivity() {
         val status = databaseHandler.addExam(modelExam(null, nomeE, dataE,oraE))
         if (status > -1) {
             Toast.makeText(applicationContext, R.string.esame_inserito_toast, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    /**
+     * Funzione che controlla i dati inseriti dall'utente e verifica che non ha lasciato record vuoti
+     */
+    fun checkDati(nome: String, data: String, ora: String) : String {
+        if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire data esame"
+        }
+        else if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            return "Inserire data e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            return "Inserire nome, data e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire nome esame"
+        }
+        else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+            return "Inserire ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+            return "Inserire nome e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire nome e data esame"
+        }
+        else {
+            return "OK"
         }
     }
 
