@@ -1,11 +1,16 @@
 package com.example.followapp
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ModificaEsami : AppCompatActivity() {
@@ -40,13 +45,51 @@ class ModificaEsami : AppCompatActivity() {
         dataE.setText(dataEsame)
         oraE.setText(oraEsame)
 
-        /*val messaggioAllerta = AlertDialog.Builder(this)
-            messaggioAllerta.setTitle("ATTENZIONE")
-            messaggioAllerta.setMessage("Siuro di voler modificare i dati dell'esame?")
-            messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
-                dialog.dismiss()*/
+        //Calendario scelta data
+        val calendario = Calendar.getInstance()
+        val year = calendario.get(Calendar.YEAR)
+        val month = calendario.get(Calendar.MONTH)
+        val day = calendario.get(Calendar.DAY_OF_MONTH)
 
 
+        /**
+         * -- GESTIONE CALENDARIO --
+         */
+        //Crezione bottone e inizializzazione per inserimento data
+        val dataButton = findViewById<Button>(R.id.dataB)
+        //Evento click dataB in cui viene aperto il calendario
+        dataButton.setOnClickListener {
+            //do{
+            val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+                dataE.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
+            }, year, month, day)
+            dataCalendario.show()
+            // } while (data passata? e si allora reinserire data esame)
+        }
+
+        /**
+         * -- GESTIONE OROLOGIO --
+         */
+        //Orologio scelta ora
+        val orologio = Calendar.getInstance()
+        //Crezione val per textView e inizializzazione per inserimento ora
+        val tVOrA = findViewById<TextView>(R.id.tVOraM)
+        //Crezione bottone e inizializzazione per inserimento ora
+        var oraButton = findViewById<Button>(R.id.oraB)
+        //Evento click oraB in cui viene aperto l'orologio
+        oraButton.setOnClickListener {
+            val oraCalendario = TimePickerDialog.OnTimeSetListener { TimePicker, mHour, mMinute ->
+                orologio.set(Calendar.HOUR_OF_DAY, mHour)
+                orologio.set(Calendar.MINUTE, mMinute)
+                tVOrA.text = SimpleDateFormat("HH:mm").format(orologio.time).toString()
+            }
+            //Visualizzazione ora selezionata
+            TimePickerDialog(this, oraCalendario, orologio.get(Calendar.HOUR_OF_DAY), orologio.get(Calendar.MINUTE), true).show()
+        }
+
+        /**
+         * -- GESTIONE ANNULLAMENTO OPERAZIONE --
+         */
         //Crezione bottone e inizializzazione annullaB
         val annullaOperazione = findViewById<Button>(R.id.annullaB)
         //Evento click annullaB in cui viene annulla l'operazione di modifica esame e ritorno al main activity
@@ -56,24 +99,47 @@ class ModificaEsami : AppCompatActivity() {
             finish()
         }
 
+        /**
+         * -- GESTIONE SALVATAGGIO MODIFICHE --
+         */
+        //Avviso di sicurezza
+        val avvisoS = AlertDialog.Builder(this)
+        avvisoS.setTitle("ATTENZIONE")
+        avvisoS.setMessage("Sicuro di voler apportare le modifiche all'esame?")
+        avvisoS.setPositiveButton("SI"){ _, _ ->
+            modificaRiga(idEsame)
+            finish()
+        }
+        avvisoS.setNegativeButton("NO"){ _, _ ->
+            //nessuna azione, l'avviso viene chiuso
+        }
+
         //Crezione bottone e inizializzazione salvaB
         val saveChangeB = findViewById<Button>(R.id.salvaB)
         //Evento click salvaB in cui vengono modificati i dati dell'esame
         saveChangeB.setOnClickListener {
-            //Chiamata funzione per modificare l'esame e aggiornare lo stato del DB
-            modificaRiga(idEsame)
-            //Chiusura activity
-            finish()
+            avvisoS.show()
         }
 
+        /**
+         * -- GESTIONE ELIMINAZIONE ESAME --
+         */
+        //Avviso di sicurezza
+        val avvisoD = AlertDialog.Builder(this)
+        avvisoD.setTitle("ATTENZIONE")
+        avvisoD.setMessage("Sicuro di voler eliminare l'esame?")
+        avvisoD.setPositiveButton("SI"){ _, _ ->
+            eliminaRiga(idEsame)
+            finish()
+        }
+        avvisoD.setNegativeButton("NO"){ _, _ ->
+            //nessuna azione, l'avviso viene chiuso
+        }
         //Crezione bottone e inizializzazione deleteB
         val deleteB = findViewById<Button>(R.id.deleteB)
         //Evento click deleteB in cui vengono eliminati i dati dell'esame
         deleteB.setOnClickListener {
-            //Chiamata funzione per eliminare l'esame e aggiornare lo stato del DB
-            eliminaRiga(idEsame)
-            //Chiusura activity
-            finish()
+           avvisoD.show()
         }
     }
 

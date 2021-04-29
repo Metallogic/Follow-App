@@ -25,23 +25,19 @@ class ExamInsertion : AppCompatActivity() {
         /**
          * -- GESTIONE NOME ESAME --
          */
-
         var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
 
 
         /**
          * -- GESTIONE CALENDARIO --
          */
-
         //Crezione val per textView e inizializzazione per inserimento data
         var tVDaTa = findViewById<TextView>(R.id.tVDataM)
-
         //Calendario scelta data
         val calendario = Calendar.getInstance()
         val year = calendario.get(Calendar.YEAR)
         val month = calendario.get(Calendar.MONTH)
         val day = calendario.get(Calendar.DAY_OF_MONTH)
-
         //Crezione bottone e inizializzazione per inserimento data
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
@@ -50,7 +46,6 @@ class ExamInsertion : AppCompatActivity() {
                                val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
                     tVDaTa.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
                 }, year, month, day)
-
                 dataCalendario.show()
            // } while (data passata? e si allora reinserire data esame)
         }
@@ -62,31 +57,24 @@ class ExamInsertion : AppCompatActivity() {
 
         //Orologio scelta ora
         val orologio = Calendar.getInstance()
-
         //Crezione val per textView e inizializzazione per inserimento ora
         val tVOrA = findViewById<TextView>(R.id.tVOraM)
-
         //Crezione bottone e inizializzazione per inserimento ora
         var oraButton = findViewById<Button>(R.id.oraB)
-
         //Evento click oraB in cui viene aperto l'orologio
         oraButton.setOnClickListener {
             val oraCalendario = TimePickerDialog.OnTimeSetListener { TimePicker, mHour, mMinute ->
                 orologio.set(Calendar.HOUR_OF_DAY, mHour)
                 orologio.set(Calendar.MINUTE, mMinute)
-
                 tVOrA.text = SimpleDateFormat("HH:mm").format(orologio.time).toString()
             }
-
             //Visualizzazione ora selezionata
             TimePickerDialog(this, oraCalendario, orologio.get(Calendar.HOUR_OF_DAY), orologio.get(Calendar.MINUTE), true).show()
-
         }
 
         /**
          * -- GESTIONE SALVATAGGIO --
          */
-
         //Crezione bottone e inizializzazione bottone salvaB
         var salvataggioButton = findViewById<Button>(R.id.salvaB)
 
@@ -162,7 +150,6 @@ class ExamInsertion : AppCompatActivity() {
     /**
      * Funzione per salvare i record degli esami nel DB.
      */
-
     private fun aggiungiRecord() {
         var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
         val nomeE = eTNomeEsame.text.toString()
