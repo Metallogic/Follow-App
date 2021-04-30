@@ -61,7 +61,7 @@ class ModificaEsami : AppCompatActivity() {
         dataButton.setOnClickListener {
             //do{
             val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                dataE.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
+                dataE.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
             }, year, month, day)
             dataCalendario.show()
             // } while (data passata? e si allora reinserire data esame)
@@ -85,6 +85,7 @@ class ModificaEsami : AppCompatActivity() {
             }
             //Visualizzazione ora selezionata
             TimePickerDialog(this, oraCalendario, orologio.get(Calendar.HOUR_OF_DAY), orologio.get(Calendar.MINUTE), true).show()
+
         }
 
         /**
@@ -111,14 +112,30 @@ class ModificaEsami : AppCompatActivity() {
             finish()
         }
         avvisoS.setNegativeButton("NO"){ _, _ ->
-            //nessuna azione, l'avviso viene chiuso
+            //linea vuota, la finiestra di dialogo si chiude
         }
 
         //Crezione bottone e inizializzazione salvaB
         val saveChangeB = findViewById<Button>(R.id.salvaB)
         //Evento click salvaB in cui vengono modificati i dati dell'esame
         saveChangeB.setOnClickListener {
-            avvisoS.show()
+            // Creazione messaggio allerta se dati non inseriti
+            val messaggioAllerta = AlertDialog.Builder(this@ModificaEsami)
+            messaggioAllerta.setTitle("ATTENZIONE")
+            messaggioAllerta.setMessage("Dati inseriti incompleti!")
+            messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
+                dialog.dismiss()
+            }
+            //Controllo dati inseriti, se incompleti messagio di errore, altrimenti toast di salvataggio andato a buon fine
+            val msg= checkDati(nomeE.getText().toString(),dataE.getText().toString(),oraE.getText().toString(),)
+            //Inserimento dati nel DB e Toast di avvenuto inserimento esame
+            if(msg.equals("OK")){
+                avvisoS.show()
+            }
+            else {
+                messaggioAllerta.setMessage(msg)
+                messaggioAllerta.show()
+            }
         }
 
         /**
@@ -129,17 +146,18 @@ class ModificaEsami : AppCompatActivity() {
         avvisoD.setTitle("ATTENZIONE")
         avvisoD.setMessage("Sicuro di voler eliminare l'esame?")
         avvisoD.setPositiveButton("SI"){ _, _ ->
+            //Chiamata funzione per eliminare l'esame e aggiornare lo stato del DB
             eliminaRiga(idEsame)
             finish()
         }
         avvisoD.setNegativeButton("NO"){ _, _ ->
-            //nessuna azione, l'avviso viene chiuso
+            //linea vuota, la finiestra di dialogo si chiude
         }
         //Crezione bottone e inizializzazione deleteB
         val deleteB = findViewById<Button>(R.id.deleteB)
         //Evento click deleteB in cui vengono eliminati i dati dell'esame
         deleteB.setOnClickListener {
-           avvisoD.show()
+            avvisoD.show()
         }
     }
 
@@ -177,6 +195,36 @@ class ModificaEsami : AppCompatActivity() {
             Toast.makeText(applicationContext, R.string.esame_eliminato_toast, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    /**
+     * Funzione che controlla i dati inseriti dall'utente e verifica che non ha lasciato record vuoti
+     */
+    fun checkDati(nome: String, data: String, ora: String) : String {
+        if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire data esame"
+        }
+        else if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            return "Inserire data e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            return "Inserire nome, data e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire nome esame"
+        }
+        else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+            return "Inserire ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+            return "Inserire nome e ora esame"
+        }
+        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
+            return "Inserire nome e data esame"
+        }
+        else {
+            return "OK"
         }
     }
 }

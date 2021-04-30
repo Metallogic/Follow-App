@@ -3,20 +3,16 @@ package com.example.followapp
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ExamInsertion : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exam_insertion)
@@ -44,7 +40,7 @@ class ExamInsertion : AppCompatActivity() {
         dataButton.setOnClickListener {
             //do{
                                val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                    tVDaTa.setText("" + mDayOfMonth + "-" + (mMonth+1) + "-" + mYear)
+                    tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
                 }, year, month, day)
                 dataCalendario.show()
            // } while (data passata? e si allora reinserire data esame)
@@ -54,7 +50,6 @@ class ExamInsertion : AppCompatActivity() {
         /**
          * -- GESTIONE OROLOGIO --
          */
-
         //Orologio scelta ora
         val orologio = Calendar.getInstance()
         //Crezione val per textView e inizializzazione per inserimento ora
