@@ -6,9 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import android.os.Build
-import android.util.Log
-import android.widget.Toast
 import kotlin.collections.ArrayList
 
 
@@ -46,7 +43,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
      *  Funzione per inserire i dati nel DB.
      */
 
-    fun addExam(exam: modelExam): Long {
+    fun addExam(exam: ModelExam): Long {
         val db = this.writableDatabase
 
         val valoriRow = ContentValues().apply {
@@ -64,12 +61,12 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
      * Funzione per leggere i dati dal DB sottoforma di ArrayList.
      */
 
-    fun vistaEsami(context: Context): ArrayList<modelExam> {
+    fun vistaEsami(context: Context): ArrayList<ModelExam> {
 
         val query = SQL_selezionaDati
         val db = this.readableDatabase
         var cursore: Cursor? = null
-        val listaEsami = ArrayList<modelExam>()
+        val listaEsami = ArrayList<ModelExam>()
 
         try {
             cursore = db.rawQuery(query, null)
@@ -91,7 +88,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
 
-                val exam = modelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
                 listaEsami.add(exam)
 
             } while (cursore.moveToNext())
@@ -147,6 +144,22 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         }
     }
 
+    /**
+     * Funzione per eliminare i dati nel DB con data passata
+     */
+    fun deleteDataExam(dataEsame: String){
+        val db = this.writableDatabase
+        try {
+            // eliminazione dati
+            db.delete(TABLE_NAME, COLUMN_NAME_DATA + " < " + dataEsame, null)
+            // Chiusura connessione DB
+            db.close()
+        }
+        catch (e: Exception){
+            // Chiusura connessione DB
+            db.close()
+        }
+    }
 
 }
 

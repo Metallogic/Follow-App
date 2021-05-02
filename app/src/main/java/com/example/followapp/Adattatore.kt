@@ -5,12 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class examAdapter (val exam: ArrayList<modelExam>, val context: Context): RecyclerView.Adapter<examAdapter.ViewHolder>(){
+class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): RecyclerView.Adapter<examAdapter.ViewHolder>(){
 
     companion object{
         val ID_ESAME = "COLUMN_ID"
@@ -19,7 +18,7 @@ class examAdapter (val exam: ArrayList<modelExam>, val context: Context): Recycl
         val ORA_ESAME ="COLUMN_NAME_ORA"
     }
 
-    class ViewHolder(itemView: View, var esame: modelExam? =null): RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View, var esame: ModelExam? =null): RecyclerView.ViewHolder(itemView){
         val tVnomeEsame: TextView
         val tVdataEsame: TextView
         val tVoraEsame: TextView
@@ -46,7 +45,7 @@ class examAdapter (val exam: ArrayList<modelExam>, val context: Context): Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val esame: modelExam = exam[position]
+        val esame: ModelExam = exam[position]
         holder.tVnomeEsame.text = esame.nomeEsame
         holder.tVdataEsame.text = esame.dataEsame
         holder.tVoraEsame.text = esame.oraEsame

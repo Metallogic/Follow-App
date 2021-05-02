@@ -19,10 +19,9 @@ class ExamInsertion : AppCompatActivity() {
 
 
         /**
-         * -- GESTIONE NOME ESAME --
+         * -- GESTIONE EDIT-TEXT NOME ESAME --
          */
         var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
-
 
         /**
          * -- GESTIONE CALENDARIO --
@@ -38,14 +37,11 @@ class ExamInsertion : AppCompatActivity() {
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
-            //do{
-                               val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                    tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
+            val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+                tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
                 }, year, month, day)
-                dataCalendario.show()
-           // } while (data passata? e si allora reinserire data esame)
+            dataCalendario.show()
         }
-
 
         /**
          * -- GESTIONE OROLOGIO --
@@ -110,14 +106,14 @@ class ExamInsertion : AppCompatActivity() {
         val oraE = tVOra.text.toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val status = databaseHandler.addExam(modelExam(null, nomeE, dataE,oraE))
+        val status = databaseHandler.addExam(ModelExam(null, nomeE, dataE,oraE))
         if (status > -1) {
             Toast.makeText(applicationContext, R.string.esame_inserito_toast, Toast.LENGTH_LONG).show()
         }
     }
 
     /**
-     * Funzione che controlla i dati inseriti dall'utente e verifica che non ha lasciato record vuoti
+     * Funzione che controlla i dati inseriti dall'utente e verifica che non abbia lasciato record vuoti
      */
     fun checkDati(nome: String, data: String, ora: String) : String {
         if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
