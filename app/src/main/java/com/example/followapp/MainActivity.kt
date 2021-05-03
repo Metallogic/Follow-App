@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -58,8 +59,10 @@ class MainActivity : AppCompatActivity() {
      * Funzione che controlla le date degli esami inseriti e cancella quelli con data < di quella attuale
      */
     fun ControlloData(){
-        val dataAttuale = Calendar.getInstance().time.toString()
-        println("DATA ATTUALE: " +dataAttuale)
+        val dataAttuale = Calendar.getInstance().time
+        val df = SimpleDateFormat("dd/MM/yyyy")
+        val dataAttualeFormattata = df.format(dataAttuale)
+        println("DATA ATTUALE: " +dataAttualeFormattata)
        // val databaseHandler: DatabaseHandler = DatabaseHandler(this)
        // databaseHandler.deleteDataExam(dataAttuale)
     }

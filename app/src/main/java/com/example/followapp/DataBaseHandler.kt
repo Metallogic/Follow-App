@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -27,7 +28,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_NOMESAME + " TEXT, "
                 + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
-        private val SQL_selezionaDati = ("SELECT  * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
+        private val SQL_selezionaDati = ("SELECT * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
+
+
     }
     override fun onCreate(db: SQLiteDatabase?) {
         //creazione tabella con campi
@@ -42,7 +45,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     /**
      *  Funzione per inserire i dati nel DB.
      */
-
     fun addExam(exam: ModelExam): Long {
         val db = this.writableDatabase
 
@@ -60,10 +62,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     /**
      * Funzione per leggere i dati dal DB sottoforma di ArrayList.
      */
-
     fun vistaEsami(context: Context): ArrayList<ModelExam> {
 
-        val query = SQL_selezionaDati
+        val query = (SQL_selezionaDati)
         val db = this.readableDatabase
         var cursore: Cursor? = null
         val listaEsami = ArrayList<ModelExam>()
