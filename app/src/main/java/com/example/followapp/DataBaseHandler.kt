@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -28,7 +27,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_NOMESAME + " TEXT, "
                 + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
-        private val SQL_selezionaDati = ("SELECT * FROM $TABLE_NAME ORDER BY $COLUMN_NAME_DATA ASC")
+        private val SQL_selezionaDati1 = ("SELECT * FROM $TABLE_NAME ")
+        private val SQL_selezionaDati2 = ("WHERE $COLUMN_NAME_DATA >= ")
+        private val SQL_selezionaDati3 = (" ORDER BY $COLUMN_NAME_DATA ASC")
 
 
     }
@@ -62,9 +63,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     /**
      * Funzione per leggere i dati dal DB sottoforma di ArrayList.
      */
-    fun vistaEsami(context: Context): ArrayList<ModelExam> {
-
-        val query = (SQL_selezionaDati)
+    fun vistaEsami(context: Context, data: String): ArrayList<ModelExam> {
+        val query = (SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
+        println("SQL: " + SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
         val db = this.readableDatabase
         var cursore: Cursor? = null
         val listaEsami = ArrayList<ModelExam>()
@@ -89,9 +90,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
 
-                val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
-                listaEsami.add(exam)
-
+                //Inserimento solo esami con data > alla data attuale
+                if (dataE >= data){
+                    val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                    listaEsami.add(exam)
+                }
             } while (cursore.moveToNext())
         }
         cursore.close()
@@ -146,20 +149,45 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     /**
-     * Funzione per eliminare i dati nel DB con data passata
+     * Funzione per leggere i dati dal DB sottoforma di ArrayList.
      */
-    fun deleteDataExam(dataEsame: String){
-        val db = this.writableDatabase
+    fun vistaEsamiVecchi(context: Context, data: String): ArrayList<ModelExam> {
+        val query = (SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
+        println("SQL: " + SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
+        val db = this.readableDatabase
+        var cursore: Cursor? = null
+        val listaEsami = ArrayList<ModelExam>()
+
         try {
-            // eliminazione dati
-            db.delete(TABLE_NAME, COLUMN_NAME_DATA + " < " + dataEsame, null)
-            // Chiusura connessione DB
-            db.close()
+            cursore = db.rawQuery(query, null)
         }
-        catch (e: Exception){
-            // Chiusura connessione DB
-            db.close()
+        catch (e: SQLiteException) {
+            db.execSQL(query)
+            return ArrayList()
         }
+
+        var idE: Int
+        var nomeE: String
+        var dataE: String
+        var oraE: String
+
+        if (cursore.moveToFirst()) {
+            do {
+                idE = cursore.getInt(cursore.getColumnIndex(COLUMN_ID))
+                nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
+                dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
+                oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
+
+                //Inserimento solo esami con data > alla data attuale
+                if (dataE < data){
+                    val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                    listaEsami.add(exam)
+                }
+            } while (cursore.moveToNext())
+        }
+        cursore.close()
+        db.close()
+        return listaEsami
     }
 
 }

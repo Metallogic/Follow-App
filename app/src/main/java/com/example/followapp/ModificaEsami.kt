@@ -59,12 +59,19 @@ class ModificaEsami : AppCompatActivity() {
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
-            //do{
             val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                dataE.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
+                var giorno: String = mDayOfMonth.toString()
+                val mesePlus1 = mMonth + 1
+                var mese: String = mesePlus1.toString()
+                if (mDayOfMonth<10){
+                    giorno = "0"+giorno
+                }
+                if (mMonth<10){
+                    mese = "0"+mese
+                }
+                dataE.setText("" + giorno + "/" + mese + "/" + mYear)
             }, year, month, day)
             dataCalendario.show()
-            // } while (data passata? e si allora reinserire data esame)
         }
 
         /**

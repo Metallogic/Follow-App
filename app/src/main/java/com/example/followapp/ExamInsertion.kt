@@ -38,10 +38,20 @@ class ExamInsertion : AppCompatActivity() {
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
             val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                tVDaTa.setText("" + mDayOfMonth + "/" + (mMonth+1) + "/" + mYear)
+                var giorno: String = mDayOfMonth.toString()
+                val mesePlus1 = mMonth + 1
+                var mese: String = mesePlus1.toString()
+                if (mDayOfMonth<10){
+                    giorno = "0"+giorno
+                }
+                if (mMonth<10){
+                    mese = "0"+mese
+                }
+                tVDaTa.setText("" + giorno + "/" + mese + "/" + mYear)
                 }, year, month, day)
             dataCalendario.show()
         }
+
 
         /**
          * -- GESTIONE OROLOGIO --

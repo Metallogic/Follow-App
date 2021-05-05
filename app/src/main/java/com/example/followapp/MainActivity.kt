@@ -30,8 +30,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ExamInsertion::class.java)
             startActivity(intent)
         }
-        //richiamo funzione ControlloData che elimina gli esami con data passata
-        ControlloData()
+
+        //Crezione bottone e inizializzazione listaE
+        val listaEsamiVecchi = findViewById<Button>(R.id.listaE)
+        //Evento click listaE in cui viene aperta l'activity ExamInsertion
+        listaEsamiVecchi.setOnClickListener {
+            val intent = Intent(this, lista_esami_passati::class.java)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -40,33 +46,23 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewExam()
-        ControlloData()
     }
 
     /**
-     * Funzione usata per mostrare la lista dei dati nella UI.
+     * Funzione usata per mostrare la lista dei dati nella UI con data > di quella attuale.
      */
     private fun viewExam() {
-        var listaEsami = dbHandler.vistaEsami(this)
+        //Lettura data attuale
+        val dataAttuale = Calendar.getInstance().time
+        val df = SimpleDateFormat("dd/MM/yyyy")
+        val dataAttualeFormattata = df.format(dataAttuale)
+
+        var listaEsami = dbHandler.vistaEsami(this, dataAttualeFormattata)
         val adattatore = examAdapter(listaEsami, this)
         var rVlistaEsami = findViewById<RecyclerView>(R.id.rVDatiEsami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore
     }
-
-    /**
-     * Funzione che controlla le date degli esami inseriti e cancella quelli con data < di quella attuale
-     */
-    fun ControlloData(){
-        val dataAttuale = Calendar.getInstance().time
-        val df = SimpleDateFormat("dd/MM/yyyy")
-        val dataAttualeFormattata = df.format(dataAttuale)
-        println("DATA ATTUALE: " +dataAttualeFormattata)
-       // val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-       // databaseHandler.deleteDataExam(dataAttuale)
-    }
-
-
 
 }

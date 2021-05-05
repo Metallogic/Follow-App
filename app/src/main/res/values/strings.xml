@@ -6,4 +6,6 @@
     <string name="errore_esame">ESAME NON MODIFICATO O CANCELLATO</string>
     <string name="operazione_annullata">OPERAZIONE ANNULATA</string>
     <string name="ora">Ora</string>
+    <string name="plusB">+</string>
+    <string name="old_exam">OLD EXAM</string>
 </resources>

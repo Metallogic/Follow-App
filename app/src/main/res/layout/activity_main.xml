@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFEFE"
-        app:layout_constraintBottom_toTopOf="@+id/plusB"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,18 +20,42 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/plusB"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:backgroundTint="#FF8BDF36"
-        android:insetBottom="0dp"
-        android:text="+"
-        android:textSize="30sp"
-        android:weightSum="1"
+        android:orientation="horizontal"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/listaE"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00BCD4"
+            android:insetBottom="0dp"
+            android:text="@string/old_exam"
+            android:textSize="24sp"
+
+            android:weightSum="1"
+            app:icon="@android:drawable/ic_menu_agenda" />
+
+        <Button
+            android:id="@+id/plusB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FF8BDF36"
+            android:insetBottom="0dp"
+            android:text="@string/plusB"
+            android:textSize="24sp"
+            android:weightSum="1" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

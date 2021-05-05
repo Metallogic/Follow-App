@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): RecyclerView.Adapter<examAdapter.ViewHolder>(){
+class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): RecyclerView.Adapter<oldExamAdapter.ViewHolder>(){
 
     companion object{
         val ID_ESAME = "COLUMN_ID"
@@ -35,7 +35,6 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
 
         val v: View = LayoutInflater.from(p0.context).inflate(R.layout.exam_row, p0, false)
         return ViewHolder(v)
-
     }
 
     override fun getItemCount(): Int{
@@ -49,7 +48,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
         holder.tVdataEsame.text = esame.dataEsame
         holder.tVoraEsame.text = esame.oraEsame
 
-        //Al click dell'oggetto esame vengono passati i valori tramite intent all'activity MpdificaEsami.kt
+        //Al click dell'oggetto esame vengono passati i valori tramite intent all'activity MpdificaEsamiOld.kt
         holder.itemView.setOnClickListener {
             val modello = exam.get(position)
             //Inizializzazione valori da passare
@@ -58,7 +57,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
             var getDataEsame: String? = modello.dataEsame
             var getOraEsame: String? = modello.oraEsame
 
-            val intent = Intent(context, ModificaEsami::class.java)
+            val intent = Intent(context, ModificaEsamiOld::class.java)
             //Passaggio valori
             intent.putExtra(ID_ESAME, getID)
             intent.putExtra(NOME_ESAME,getNomeEsame)
