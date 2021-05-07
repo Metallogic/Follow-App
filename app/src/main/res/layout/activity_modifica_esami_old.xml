@@ -51,7 +51,7 @@
             android:id="@+id/tVTitolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modifica dati esame"
+            android:text="Dati esame"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />

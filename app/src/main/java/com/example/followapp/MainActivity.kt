@@ -38,6 +38,23 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, lista_esami_passati::class.java)
             startActivity(intent)
         }
+
+
+
+        val searchView = findViewById<SearchView>(R.id.sVExam)
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val adpFilter =
+                getFilter()
+                adpFilter.filter(newText)
+                return false
+            }
+
+        })
     }
 
     /**
@@ -64,5 +81,7 @@ class MainActivity : AppCompatActivity() {
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore
     }
+
+
 
 }

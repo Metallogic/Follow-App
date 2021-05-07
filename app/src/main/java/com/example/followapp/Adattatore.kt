@@ -5,10 +5,19 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+import kotlin.collections.ArrayList
 
 class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): RecyclerView.Adapter<examAdapter.ViewHolder>(){
+
+    //creazione di un ArrayList con il nome examFilterList, e passaggio di tutti gli oggetti
+    var examFilterList = ArrayList<ModelExam>()
+    init {
+        examFilterList = exam
+    }
 
     companion object{
         val ID_ESAME = "COLUMN_ID"
@@ -40,7 +49,37 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
 
     override fun getItemCount(): Int{
         return exam.size
+    }
 
+    /**
+     * Funzione che filtra i risultati della ricerca degli esami
+     */
+    fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    examFilterList = exam
+                } else {
+                    val resultList = ArrayList<ModelExam>()
+                    for (row in exam) {
+                        if (row.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                            resultList.add(row)
+                        }
+                    }
+                    examFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = examFilterList
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                examFilterList = results?.values as ArrayList<ModelExam>
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -68,4 +107,5 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
             context.startActivity(intent)
         }
     }
+
 }
