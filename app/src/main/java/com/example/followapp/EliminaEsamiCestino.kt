@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import java.util.*
 
 
-class ModificaEsamiOld : AppCompatActivity() {
+class EliminaEsamiCestino : AppCompatActivity() {
 
     companion object {
         val ID_ESAME = "COLUMN_ID"
@@ -20,7 +19,7 @@ class ModificaEsamiOld : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_modifica_esami_old)
+        setContentView(R.layout.activity_elimina_esami_cestino)
 
         var nomeE = findViewById<TextView>(R.id.eTNomeEsameM)
         var dataE = findViewById<TextView>(R.id.tVDataM)
@@ -55,12 +54,34 @@ class ModificaEsamiOld : AppCompatActivity() {
         }
 
         /**
+         * -- GESTIONE RIPRISTINO ESAME --
+         */
+        //Avviso di sicurezza
+        val avvisoR = AlertDialog.Builder(this)
+        avvisoR.setTitle("ATTENZIONE")
+        avvisoR.setMessage("Sicuro di voler ripristinare l'esame?")
+        avvisoR.setPositiveButton("SI") { _, _ ->
+            //Chiamata funzione per ripristinare l'esame e aggiornare lo stato del DB
+            ripristinaEsame(idEsame)
+            finish()
+        }
+        avvisoR.setNegativeButton("NO") { _, _ ->
+            //linea vuota, la finiestra di dialogo si chiude
+        }
+        //Crezione bottone e inizializzazione ripristinoB
+        val ripristinoEsame = findViewById<Button>(R.id.ripristinoB)
+        //Evento click ripristinoB in cui viene ripristinato l'esame cestinato
+        ripristinoEsame.setOnClickListener {
+            avvisoR.show()
+        }
+
+        /**
          * -- GESTIONE ELIMINAZIONE ESAME --
          */
         //Avviso di sicurezza
         val avvisoD = AlertDialog.Builder(this)
         avvisoD.setTitle("ATTENZIONE")
-        avvisoD.setMessage("Sicuro di voler eliminare l'esame?")
+        avvisoD.setMessage("Sicuro di voler eliminare definitivamente l'esame?")
         avvisoD.setPositiveButton("SI") { _, _ ->
             //Chiamata funzione per eliminare l'esame e aggiornare lo stato del DB
             eliminaRiga(idEsame)
@@ -82,9 +103,23 @@ class ModificaEsamiOld : AppCompatActivity() {
      */
     fun eliminaRiga(idEsame: Int) {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val status = databaseHandler.trashExam(idEsame)
+        val status = databaseHandler.deleteExam(idEsame)
         if (status > -1) {
-            Toast.makeText(applicationContext, R.string.esame_cestinato_toast, Toast.LENGTH_LONG)
+            Toast.makeText(applicationContext, R.string.esame_eliminato_toast, Toast.LENGTH_LONG)
+                .show()
+        } else {
+            Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    /**
+     * Funzione che permette il ripristino dell'esame
+     */
+    fun ripristinaEsame(idEsame: Int) {
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        val status = databaseHandler.UnTrashExam(idEsame)
+        if (status > -1) {
+            Toast.makeText(applicationContext, R.string.esame_ripristinato, Toast.LENGTH_LONG)
                 .show()
         } else {
             Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()

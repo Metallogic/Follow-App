@@ -28,14 +28,12 @@
             android:weightSum="1" />
 
         <Button
-            android:id="@+id/salvaB"
+            android:id="@+id/ripristinoB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#8BDF36"
-            android:text="SALVA MODIFICHE"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:weightSum="1" />
+            android:text="RIPRISTINA ESAME"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/deleteBtrash"
@@ -61,7 +59,7 @@
             android:id="@+id/tVTitolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modifica dati esame"
+            android:text="Dati esame"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
@@ -84,19 +82,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Nome Esame"
+                android:text="Nome Esame - "
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/eTNomeEsameM"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="inserire nome esame"
-                android:inputType="textPersonName"
-                android:textAlignment="textStart" />
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="TextView"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
         <Button
@@ -104,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00BCD4"
-            android:text="DATA" />
+            android:text="DATA ESAME" />
 
         <TextView
             android:id="@+id/tVDataM"
@@ -118,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00BCD4"
-            android:text="ORA" />
+            android:text="ORA ESAME" />
 
         <TextView
             android:id="@+id/tVOraM"

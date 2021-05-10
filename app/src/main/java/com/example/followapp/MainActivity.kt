@@ -3,6 +3,8 @@ package com.example.followapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,14 +33,35 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //Crezione bottone e inizializzazione listaE
-        val listaEsamiVecchi = findViewById<Button>(R.id.listaE)
-        //Evento click listaE in cui viene aperta l'activity ExamInsertion
-        listaEsamiVecchi.setOnClickListener {
-            val intent = Intent(this, lista_esami_passati::class.java)
-            startActivity(intent)
-        }
+    }
 
+    /**
+     * Funzione di creazione del menu
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu);
+        return true
+    }
+
+    /**
+     * Funzione che gestisce il click degli item del menu
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId;
+        if (id == R.id.menuNuovoEsame){
+            val intent = Intent(this, ExamInsertion::class.java)
+            startActivity(intent)
+            return true
+        }else if (id == R.id.menuArchivio){
+            val intent = Intent(this, Old_Exam::class.java)
+            startActivity(intent)
+            return true
+        }else if (id == R.id.menuCestino) {
+            val intent = Intent(this, cestino::class.java)
+            startActivity(intent)
+            return true
+        }
+       return super.onOptionsItemSelected(item)
     }
 
     /**
@@ -60,12 +83,10 @@ class MainActivity : AppCompatActivity() {
 
         var listaEsami = dbHandler.vistaEsami(this, dataAttualeFormattata)
         val adattatore = examAdapter(listaEsami, this)
-        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVDatiEsami)
+        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore
     }
-
-
 
 }

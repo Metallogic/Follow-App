@@ -10,7 +10,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Archivio esami"
+        android:text="Cestino"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"

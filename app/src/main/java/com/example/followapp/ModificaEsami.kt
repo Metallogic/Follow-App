@@ -161,7 +161,7 @@ class ModificaEsami : AppCompatActivity() {
             //linea vuota, la finiestra di dialogo si chiude
         }
         //Crezione bottone e inizializzazione deleteB
-        val deleteB = findViewById<Button>(R.id.deleteB)
+        val deleteB = findViewById<Button>(R.id.deleteBtrash)
         //Evento click deleteB in cui vengono eliminati i dati dell'esame
         deleteB.setOnClickListener {
             avvisoD.show()
@@ -186,7 +186,7 @@ class ModificaEsami : AppCompatActivity() {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         val status = databaseHandler.updateExam(idEsame, nomeE, dataE, oraE)
         if (status > -1) {
-            Toast.makeText(applicationContext, R.string.esame_modificato_toast, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, R.string.esame_cestinato_toast, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()
         }
@@ -197,9 +197,9 @@ class ModificaEsami : AppCompatActivity() {
      */
     fun eliminaRiga(idEsame: Int) {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val status = databaseHandler.deleteExam(idEsame)
+        val status = databaseHandler.trashExam(idEsame)
         if (status > -1) {
-            Toast.makeText(applicationContext, R.string.esame_eliminato_toast, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, R.string.esame_cestinato_toast, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()
         }

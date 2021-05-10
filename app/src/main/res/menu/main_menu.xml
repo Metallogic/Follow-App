@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuNuovoEsame"
+        android:title="Nuovo esame" />
+    <item
+        android:id="@+id/menuArchivio"
+        android:title="Archivio" />
+    <item
+        android:id="@+id/menuCestino"
+        android:title="Cestino" />
+</menu>

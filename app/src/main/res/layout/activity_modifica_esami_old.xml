@@ -28,7 +28,7 @@
             android:weightSum="1" />
 
         <Button
-            android:id="@+id/deleteB"
+            android:id="@+id/deleteBtrash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FF2B1B"

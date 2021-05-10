@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FollowApp">
-        <activity android:name=".ModificaEsamiOld"></activity>
+
+
         <activity android:name=".SchermataCaricamentoApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,14 +18,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ModificaEsami" />
+
+
         <activity
             android:name=".ExamInsertion"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".lista_esami_passati"
+            android:name=".Old_Exam"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".cestino"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ModificaEsami"
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".MainActivity" />
+
+        <activity
+            android:name=".ModificaEsamiOld"
+            android:parentActivityName=".Old_Exam" />
+
+        <activity
+            android:name=".EliminaEsamiCestino"
+            android:parentActivityName=".cestino" />
+
     </application>
 
 </manifest>

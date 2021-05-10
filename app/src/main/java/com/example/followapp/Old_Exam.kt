@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class lista_esami_passati : AppCompatActivity() {
+class Old_Exam : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_esami_passati)
@@ -23,7 +23,7 @@ class lista_esami_passati : AppCompatActivity() {
     }
 
     /**
-     * Funzione usata per mostrare la lista dei dati nella UI con data > di quella attuale.
+     * Funzione usata per mostrare la lista dei dati nella UI con data < di quella attuale.
      */
     private fun viewOldExam() {
         //Lettura data attuale
@@ -33,7 +33,7 @@ class lista_esami_passati : AppCompatActivity() {
 
         var listaEsami = MainActivity.dbHandler.vistaEsamiVecchi(this, dataAttualeFormattata)
         val adattatore = oldExamAdapter(listaEsami, this)
-        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVDatiEsami)
+        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore

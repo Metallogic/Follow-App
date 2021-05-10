@@ -2,8 +2,10 @@
     <string name="app_name">Follow App</string>
     <string name="esame_inserito_toast">ESAME INSERITO</string>
     <string name="esame_modificato_toast">ESAME MODIFICATO</string>
+    <string name="esame_cestinato_toast">ESAME CESTINATO</string>
     <string name="esame_eliminato_toast">ESAME ELIMINATO</string>
     <string name="errore_esame">ESAME NON MODIFICATO O CANCELLATO</string>
+    <string name="esame_ripristinato">ESAME RIPRISTINATO</string>
     <string name="operazione_annullata">OPERAZIONE ANNULATA</string>
     <string name="ora">Ora</string>
     <string name="plusB">+</string>

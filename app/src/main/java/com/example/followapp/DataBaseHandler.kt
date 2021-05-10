@@ -23,9 +23,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         private val COLUMN_NAME_NOMESAME = "nomeEsame"
         private val COLUMN_NAME_DATA = "dataEsame"
         private val COLUMN_NAME_ORA = "oraEsame"
+        private val COLUMN_CESTINO = "cestino"
         private val SQL_CreazioneTabella = ("CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_NOMESAME + " TEXT, "
-                + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT" + ")")
+                + COLUMN_NAME_DATA + " TEXT, " + COLUMN_NAME_ORA + " TEXT, " + COLUMN_CESTINO + " TEXT DEFAULT \"v\" "+ ")")
         private val SQL_DropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
         private val SQL_selezionaDati1 = ("SELECT * FROM $TABLE_NAME ")
         private val SQL_selezionaDati2 = ("WHERE $COLUMN_NAME_DATA >= ")
@@ -65,7 +66,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
      */
     fun vistaEsami(context: Context, data: String): ArrayList<ModelExam> {
         val query = (SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
-        println("SQL: " + SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
         val db = this.readableDatabase
         var cursore: Cursor? = null
         val listaEsami = ArrayList<ModelExam>()
@@ -82,6 +82,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         var nomeE: String
         var dataE: String
         var oraE: String
+        var cestinoE: String
 
         if (cursore.moveToFirst()) {
             do {
@@ -89,11 +90,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
+                cestinoE = cursore.getString(cursore.getColumnIndex(COLUMN_CESTINO))
 
                 //Inserimento solo esami con data > alla data attuale
                 if (dataE >= data){
-                    val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
-                    listaEsami.add(exam)
+                    if (cestinoE.equals("v")) {
+                        val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                        listaEsami.add(exam)
+                    }
                 }
             } while (cursore.moveToNext())
         }
@@ -130,6 +134,58 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     /**
+     * Funzione per flaggare gli esami eliminati e metterli nel cestino
+     */
+    fun trashExam(idEsame: Int): Int{
+        val db = this.writableDatabase
+        val valoriRow = ContentValues()
+        val success: Int
+        val flagTrash = "c"
+
+        //Aggiunta al ContentValues il valore da inserire nel DB per aggiornare riga tramite ID
+        valoriRow.put(COLUMN_CESTINO, flagTrash)
+
+        try {
+            // Aggiornamento riga
+            success = db.update(TABLE_NAME, valoriRow, COLUMN_ID + " = " + idEsame, null)
+            // Chiusura connessione DB
+            db.close()
+            return success
+        }
+        catch (e: Exception){
+            // Chiusura connessione DB
+            db.close()
+            return -1
+        }
+    }
+
+    /**
+     * Funzione per ripristinare gli esami cestinati
+     */
+    fun UnTrashExam(idEsame: Int): Int{
+        val db = this.writableDatabase
+        val valoriRow = ContentValues()
+        val success: Int
+        val flagTrash = "v"
+
+        //Aggiunta al ContentValues il valore da inserire nel DB per aggiornare riga tramite ID
+        valoriRow.put(COLUMN_CESTINO, flagTrash)
+
+        try {
+            // Aggiornamento riga
+            success = db.update(TABLE_NAME, valoriRow, COLUMN_ID + " = " + idEsame, null)
+            // Chiusura connessione DB
+            db.close()
+            return success
+        }
+        catch (e: Exception){
+            // Chiusura connessione DB
+            db.close()
+            return -1
+        }
+    }
+
+    /**
      * Funzione per eliminare i dati nel DB
      */
     fun deleteExam(idEsame: Int): Int {
@@ -153,7 +209,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
      */
     fun vistaEsamiVecchi(context: Context, data: String): ArrayList<ModelExam> {
         val query = (SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
-        println("SQL: " + SQL_selezionaDati1 + SQL_selezionaDati2 + data + SQL_selezionaDati3)
         val db = this.readableDatabase
         var cursore: Cursor? = null
         val listaEsami = ArrayList<ModelExam>()
@@ -180,6 +235,50 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
 
                 //Inserimento solo esami con data > alla data attuale
                 if (dataE < data){
+                    val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
+                    listaEsami.add(exam)
+                }
+            } while (cursore.moveToNext())
+        }
+        cursore.close()
+        db.close()
+        return listaEsami
+    }
+
+    /**
+     * Funzione per leggere i dati cestinati dal DB sottoforma di ArrayList.
+     */
+    fun vistaEsamiCestinati(context: Context): ArrayList<ModelExam> {
+        val query = (SQL_selezionaDati1)
+        val db = this.readableDatabase
+        var cursore: Cursor? = null
+        val listaEsami = ArrayList<ModelExam>()
+
+        try {
+            cursore = db.rawQuery(query, null)
+        }
+        catch (e: SQLiteException) {
+            db.execSQL(query)
+            return ArrayList()
+        }
+
+        var idE: Int
+        var nomeE: String
+        var dataE: String
+        var oraE: String
+        var cestinoE: String
+
+        if (cursore.moveToFirst()) {
+            do {
+                idE = cursore.getInt(cursore.getColumnIndex(COLUMN_ID))
+                nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
+                dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
+                oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
+                cestinoE = cursore.getString(cursore.getColumnIndex(COLUMN_CESTINO))
+
+
+                //Inserimento solo esami con data > alla data attuale
+                if (cestinoE.equals("c")) {
                     val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
                     listaEsami.add(exam)
                 }
