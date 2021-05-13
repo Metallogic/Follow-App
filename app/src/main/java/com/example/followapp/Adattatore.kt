@@ -28,7 +28,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
 
         //Inizializzazione
         init {
-            //Inizializzazione itemView: TextView e Botton
+            //Inizializzazione itemView: TextView
             tVnomeEsame = itemView.findViewById(R.id.tVnomeEsameRow)
             tVdataEsame = itemView.findViewById(R.id.tVdataEsameRow)
             tVoraEsame = itemView.findViewById(R.id.tVoraEsameRow)
@@ -36,16 +36,13 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder{
-
         val v: View = LayoutInflater.from(p0.context).inflate(R.layout.exam_row, p0, false)
         return ViewHolder(v)
-
     }
 
     override fun getItemCount(): Int{
         return exam.size
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val esame: ModelExam = exam[position]
