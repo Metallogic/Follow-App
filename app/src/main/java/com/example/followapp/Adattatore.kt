@@ -25,6 +25,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
         val tVnomeEsame: TextView
         val tVdataEsame: TextView
         val tVoraEsame: TextView
+        val tVCdD: TextView //TextView Countdown Day
 
         //Inizializzazione
         init {
@@ -32,6 +33,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
             tVnomeEsame = itemView.findViewById(R.id.tVnomeEsameRow)
             tVdataEsame = itemView.findViewById(R.id.tVdataEsameRow)
             tVoraEsame = itemView.findViewById(R.id.tVoraEsameRow)
+            tVCdD = itemView.findViewById(R.id.tVCountdownDay)
         }
     }
 
@@ -49,6 +51,9 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
         holder.tVnomeEsame.text = esame.nomeEsame
         holder.tVdataEsame.text = esame.dataEsame
         holder.tVoraEsame.text = esame.oraEsame
+        holder.tVCdD.text = null  //CODICE DA IMPLEMENTARE!!
+
+
 
         //Al click dell'oggetto esame vengono passati i valori tramite intent all'activity MpdificaEsami.kt
         holder.itemView.setOnClickListener {
@@ -69,5 +74,4 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
             context.startActivity(intent)
         }
     }
-
 }

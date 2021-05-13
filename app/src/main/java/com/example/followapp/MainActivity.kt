@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         val df = SimpleDateFormat("dd/MM/yyyy")
         val dataAttualeFormattata = df.format(dataAttuale)
 
+        //aggiornamento date nel DB con data attuale tramite funzione updateDate()
+        dbHandler.updateDate()
         var listaEsami = dbHandler.vistaEsami(this, dataAttualeFormattata)
         val adattatore = examAdapter(listaEsami, this)
         var rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)

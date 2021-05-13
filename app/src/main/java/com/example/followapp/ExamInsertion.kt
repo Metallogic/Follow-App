@@ -21,7 +21,7 @@ class ExamInsertion : AppCompatActivity() {
         /**
          * -- GESTIONE EDIT-TEXT NOME ESAME --
          */
-        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
+        val eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
 
         /**
          * -- GESTIONE CALENDARIO --
