@@ -20,6 +20,7 @@ class ModificaEsami : AppCompatActivity() {
         val NOME_ESAME = "COLUMN_NAME_NOMESAME"
         val DATA_ESAME = "COLUMN_NAME_DATA"
         val ORA_ESAME = "COLUMN_NAME_ORA"
+        val COUNTDOWN = "COUNTDOWN_VALOR"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class ModificaEsami : AppCompatActivity() {
         var nomeE = findViewById<EditText>(R.id.eTNomeEsameM)
         var dataE = findViewById<TextView>(R.id.tVDataM)
         var oraE = findViewById<TextView>(R.id.tVOraM)
+        var CountDownDay = findViewById<TextView>(R.id.CountDownDay)
 
         /**
          * Settaggio dati nell'activity
@@ -39,11 +41,13 @@ class ModificaEsami : AppCompatActivity() {
         val nomeEsame = intent.getStringExtra(NOME_ESAME)
         val dataEsame = intent.getStringExtra(DATA_ESAME)
         val oraEsame = intent.getStringExtra(ORA_ESAME)
+        val CountDay = intent.getIntExtra(COUNTDOWN, -1)
 
         //Settaggio valori nellle EditText e TextView
         nomeE.setText(nomeEsame)
         dataE.setText(dataEsame)
         oraE.setText(oraEsame)
+        CountDownDay.setText(CountDay.toString())
 
         //Calendario scelta data
         val calendario = Calendar.getInstance()

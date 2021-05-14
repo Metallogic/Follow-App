@@ -15,7 +15,8 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
         val ID_ESAME = "COLUMN_ID"
         val NOME_ESAME = "COLUMN_NAME_NOMESAME"
         val DATA_ESAME = "COLUMN_NAME_DATA"
-        val ORA_ESAME ="COLUMN_NAME_ORA"
+        val ORA_ESAME = "COLUMN_NAME_ORA"
+        val COUNTDOWN = "COUNTDOWN_VALOR"
     }
 
     class ViewHolder(itemView: View, var esame: ModelExam? =null): RecyclerView.ViewHolder(itemView){
@@ -80,6 +81,7 @@ class examAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recycl
             intent.putExtra(NOME_ESAME,getNomeEsame)
             intent.putExtra(DATA_ESAME, getDataEsame)
             intent.putExtra(ORA_ESAME, getOraEsame)
+            intent.putExtra(COUNTDOWN, numGiorni)
 
             context.startActivity(intent)
         }
