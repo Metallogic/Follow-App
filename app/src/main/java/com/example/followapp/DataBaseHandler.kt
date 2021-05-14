@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private val DATABASE_VERSION = 1
+        private val DATABASE_VERSION = 2
         private val DATABASE_NAME = "DBesami.db"
         private val TABLE_NAME = "Esami"
         private val COLUMN_ID = "_id"

@@ -27,7 +27,7 @@
         android:id="@+id/rVesami"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#FFFEFE"
+        android:background="#00000000"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
