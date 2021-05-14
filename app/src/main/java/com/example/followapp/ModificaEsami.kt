@@ -69,7 +69,7 @@ class ModificaEsami : AppCompatActivity() {
                 if (mMonth<10){
                     mese = "0"+mese
                 }
-                dataE.setText("" + giorno + "/" + mese + "/" + mYear)
+                dataE.setText("" + mYear + "-" + mese + "-" + giorno)
             }, year, month, day)
             dataCalendario.show()
         }
@@ -186,7 +186,7 @@ class ModificaEsami : AppCompatActivity() {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         val status = databaseHandler.updateExam(idEsame, nomeE, dataE, oraE)
         if (status > -1) {
-            Toast.makeText(applicationContext, R.string.esame_cestinato_toast, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, R.string.esame_modificato_toast, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, R.string.errore_esame, Toast.LENGTH_LONG).show()
         }

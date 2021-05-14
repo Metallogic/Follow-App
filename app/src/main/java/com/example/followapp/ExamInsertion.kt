@@ -47,7 +47,7 @@ class ExamInsertion : AppCompatActivity() {
                 if (mMonth<10){
                     mese = "0"+mese
                 }
-                tVDaTa.setText("" + giorno + "/" + mese + "/" + mYear)
+                tVDaTa.setText("" + mYear + "-" + mese + "-" + giorno)
                 }, year, month, day)
             dataCalendario.show()
         }

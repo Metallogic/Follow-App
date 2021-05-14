@@ -35,7 +35,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         private val SQL_selezionaDati1 = ("SELECT * FROM $TABLE_NAME ")
         private val SQL_selezionaDati2 = ("WHERE $COLUMN_NAME_DATA >= ")
         private val SQL_selezionaDati3 = (" ORDER BY $COLUMN_NAME_DATA ASC")
-        private val SQL_countdownDay = ("SELECT $COLUMN_NAME_DATA, $COLUMN_DATA_ATTUALE, JULIANDAY($COLUMN_NAME_DATA) - JULIANDAY($COLUMN_DATA_ATTUALE) AS date_difference FROM $TABLE_NAME")
+        private val SQL_countdownDay = ("SELECT $COLUMN_NAME_DATA, $COLUMN_DATA_ATTUALE, JULIANDAY($COLUMN_NAME_DATA) - JULIANDAY($COLUMN_DATA_ATTUALE)" +
+                " FROM $TABLE_NAME WHERE $COLUMN_ID = ")
 
 
     }
@@ -74,10 +75,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         val db = this.readableDatabase
         var cursore: Cursor? = null
         val listaEsami = ArrayList<ModelExam>()
-
-        val CursorediffGiorni = db.rawQuery(SQL_countdownDay, null)
-        val diffGiorni =CursorediffGiorni.getInt()
-        println("@@@ GIORNI DIFFERENZA:" + diffGiorni.toString())
 
         try {
             cursore = db.rawQuery(query, null)
@@ -304,26 +301,40 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     fun updateDate(){
         val db = this.writableDatabase
         val valoriRow = ContentValues()
-        val success: Int
 
         //Lettura data attuale
         val dataAttuale = Calendar.getInstance().time
-        val df = SimpleDateFormat("dd/MM/yyyy")
+        val df = SimpleDateFormat("yyyy-MM-dd")
         val dataAttualeFormattata = df.format(dataAttuale)
 
         //Aggiunta al ContentValues i valori da inserire nel DB per aggiornare riga tramite ID
         valoriRow.put(COLUMN_DATA_ATTUALE, dataAttualeFormattata)
 
-
         try {
             // Aggiornamento riga
-            success = db.update(TABLE_NAME, valoriRow, null, null)
+            db.update(TABLE_NAME, valoriRow, null, null)
             // Chiusura connessione DB
             db.close()
         }
         catch (e: Exception){
             // Chiusura connessione DB
             db.close()
+        }
+    }
+
+    /**
+     * Funzione per leggere i giorni rimanenti all'esame
+     */
+    fun readCountdown(idEsame: Int): Int {
+        val db = this.writableDatabase
+        val query = (SQL_countdownDay + idEsame)
+        val c = db.rawQuery(query, null)
+        if (c != null && c.moveToFirst()) {
+            var diffGiorni = c.getString(2) //Indice 2 in quanto è la colonna che contiene la differenza di giorni
+            return diffGiorni.toInt()
+        }
+        else{
+            return 0
         }
     }
 

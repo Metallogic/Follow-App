@@ -28,7 +28,7 @@ class Old_Exam : AppCompatActivity() {
     private fun viewOldExam() {
         //Lettura data attuale
         val dataAttuale = Calendar.getInstance().time
-        val df = SimpleDateFormat("dd/MM/yyyy")
+        val df = SimpleDateFormat("yyyy-MM-dd")
         val dataAttualeFormattata = df.format(dataAttuale)
 
         var listaEsami = MainActivity.dbHandler.vistaEsamiVecchi(this, dataAttualeFormattata)

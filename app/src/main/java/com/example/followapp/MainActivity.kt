@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     private fun viewExam() {
         //Lettura data attuale
         val dataAttuale = Calendar.getInstance().time
-        val df = SimpleDateFormat("dd/MM/yyyy")
+        val df = SimpleDateFormat("yyyy-MM-dd")
         val dataAttualeFormattata = df.format(dataAttuale)
 
         //aggiornamento date nel DB con data attuale tramite funzione updateDate()
