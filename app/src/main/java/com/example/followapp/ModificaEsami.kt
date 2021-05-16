@@ -213,29 +213,39 @@ class ModificaEsami : AppCompatActivity() {
      * Funzione che controlla i dati inseriti dall'utente e verifica che non ha lasciato record vuoti
      */
     fun checkDati(nome: String, data: String, ora: String) : String {
+        val maxLength = "Nome esame troppo lungo (MAX 30 caratteri)"
         if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
-            return "Inserire data esame"
-        }
-        else if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
-            return "Inserire data e ora esame"
-        }
-        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            if (nome.length >= 30) {
+                return "Inserire data esame +\n + $maxLength"
+            } else {
+                return "Inserire data esame"
+            }
+        } else if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
+            if (nome.length >= 30) {
+                return "Inserire data e ora esame \n$maxLength"
+            } else {
+                return "Inserire data e ora esame"
+            }
+        } else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
             return "Inserire nome, data e ora esame"
-        }
-        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
+        } else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
             return "Inserire nome esame"
-        }
-        else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
-            return "Inserire ora esame"
-        }
-        else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+        } else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
+            if (nome.length >= 30) {
+                return "Inserire data esame +\n + $maxLength"
+            } else {
+                return "Inserire ora esame"
+            }
+        } else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
             return "Inserire nome e ora esame"
-        }
-        else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
+        } else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
             return "Inserire nome e data esame"
+        } else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
+            if (nome.length >= 30) {
+                return "$maxLength"
+            }
         }
-        else {
-            return "OK"
-        }
+
+        return "OK"
     }
 }
