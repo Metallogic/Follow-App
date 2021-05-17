@@ -52,8 +52,10 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val esame: ModelExam = exam[position]
+        val dataEsame = dataReverse(esame.dataEsame)
+        //Settaggio valori dei textview
         holder.tVnomeEsame.text = esame.nomeEsame
-        holder.tVdataEsame.text = esame.dataEsame
+        holder.tVdataEsame.text = dataEsame
         holder.tVoraEsame.text = esame.oraEsame
         holder.tVBar1.text = "-"
         holder.tVBar2.text = "-"
@@ -82,5 +84,15 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
 
             context.startActivity(intent)
         }
+    }
+    /**
+     * Funzione per trasformare la data da formato Americano in Europeo
+     */
+    fun dataReverse(data: String): String{
+        val anno = data.subSequence(0,4).toString()
+        val mese = data.subSequence(5,7).toString()
+        val giorno = data.subSequence(8,10).toString()
+        val dataReversed = (giorno + "-" + mese + "-" + anno)
+        return dataReversed
     }
 }
