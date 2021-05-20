@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     tools:context=".ExamInsertion">
 
     <Button
@@ -24,9 +25,9 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="72dp"
         android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-16dp"
-        android:weightSum="2">
+        tools:layout_editor_absoluteX="-16dp">
 
         <TextView
             android:id="@+id/tVTitolo"
@@ -62,7 +63,6 @@
                 android:id="@+id/eTNomeEsameM"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:autofillHints=""
                 android:ems="10"
                 android:hint="inserire nome esame (MAX 30 caratteri)"
                 android:inputType="textPersonName"

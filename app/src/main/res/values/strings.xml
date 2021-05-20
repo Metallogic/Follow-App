@@ -11,4 +11,5 @@
     <string name="plusB">+</string>
     <string name="old_exam">ARCHIVIO</string>
     <string name="day">DAY</string>
+    <string name="giorni_mancanti">Giorni mancanti</string>
 </resources>
