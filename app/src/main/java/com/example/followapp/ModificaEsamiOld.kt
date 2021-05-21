@@ -22,9 +22,9 @@ class ModificaEsamiOld : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modifica_esami_old)
 
-        var nomeE = findViewById<TextView>(R.id.eTNomeEsameM)
-        var dataE = findViewById<TextView>(R.id.tVDataM)
-        var oraE = findViewById<TextView>(R.id.tVOraM)
+        val nomeE = findViewById<TextView>(R.id.eTNomeEsameM)
+        val dataE = findViewById<TextView>(R.id.tVDataM)
+        val oraE = findViewById<TextView>(R.id.tVOraM)
 
         /**
          * Settaggio dati nell'activity
@@ -81,7 +81,7 @@ class ModificaEsamiOld : AppCompatActivity() {
      * Funzione che permette l'eliminazione della riga relativa all'esame in oggetto
      */
     fun eliminaRiga(idEsame: Int) {
-        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        val databaseHandler = DatabaseHandler(this)
         val status = databaseHandler.trashExam(idEsame)
         if (status > -1) {
             Toast.makeText(applicationContext, R.string.esame_cestinato_toast, Toast.LENGTH_LONG)

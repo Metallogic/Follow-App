@@ -24,9 +24,9 @@ class cestino : AppCompatActivity() {
      * Funzione usata per mostrare la lista degli esami cestinati
      */
     private fun viewExam() {
-        var listaEsami = MainActivity.dbHandler.vistaEsamiCestinati(this)
+        val listaEsami = MainActivity.dbHandler.vistaEsamiCestinati(this)
         val adattatore = trashAdapter(listaEsami, this)
-        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
+        val rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore

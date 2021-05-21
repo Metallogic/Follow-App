@@ -31,9 +31,9 @@ class Old_Exam : AppCompatActivity() {
         val df = SimpleDateFormat("yyyy-MM-dd")
         val dataAttualeFormattata = df.format(dataAttuale)
 
-        var listaEsami = MainActivity.dbHandler.vistaEsamiVecchi(this, dataAttualeFormattata)
+        val listaEsami = MainActivity.dbHandler.vistaEsamiVecchi(this, dataAttualeFormattata)
         val adattatore = oldExamAdapter(listaEsami, this)
-        var rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
+        val rVlistaEsami = findViewById<RecyclerView>(R.id.rVesami)
 
         rVlistaEsami.layoutManager = LinearLayoutManager(this)
         rVlistaEsami.adapter = adattatore

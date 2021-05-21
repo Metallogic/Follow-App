@@ -27,10 +27,10 @@ class ModificaEsami : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modifica_esami)
 
-        var nomeE = findViewById<EditText>(R.id.eTNomeEsameM)
-        var dataE = findViewById<TextView>(R.id.tVDataM)
-        var oraE = findViewById<TextView>(R.id.tVOraM)
-        var CountDownDay = findViewById<TextView>(R.id.CountDownDay)
+        val nomeE = findViewById<EditText>(R.id.eTNomeEsameM)
+        val dataE = findViewById<TextView>(R.id.tVDataM)
+        val oraE = findViewById<TextView>(R.id.tVOraM)
+        val countDownDay = findViewById<TextView>(R.id.CountDownDay)
 
         /**
          * Settaggio dati nell'activity
@@ -47,7 +47,7 @@ class ModificaEsami : AppCompatActivity() {
         nomeE.setText(nomeEsame)
         dataE.setText(dataEsame)
         oraE.setText(oraEsame)
-        CountDownDay.setText(CountDay.toString())
+        countDownDay.setText(CountDay.toString())
 
         //Calendario scelta data
         val calendario = Calendar.getInstance()
@@ -86,7 +86,7 @@ class ModificaEsami : AppCompatActivity() {
         //Crezione val per textView e inizializzazione per inserimento ora
         val tVOrA = findViewById<TextView>(R.id.tVOraM)
         //Crezione bottone e inizializzazione per inserimento ora
-        var oraButton = findViewById<Button>(R.id.oraB)
+        val oraButton = findViewById<Button>(R.id.oraB)
         //Evento click oraB in cui viene aperto l'orologio
         oraButton.setOnClickListener {
             val oraCalendario = TimePickerDialog.OnTimeSetListener { TimePicker, mHour, mMinute ->
@@ -177,13 +177,13 @@ class ModificaEsami : AppCompatActivity() {
      */
     fun modificaRiga(idEsame: Int) {
         //Inizializzazione campi da modificare
-        var eTNomeEsame = findViewById<EditText>(R.id.eTNomeEsameM)
+        val eTNomeEsame = findViewById<EditText>(R.id.eTNomeEsameM)
         val nomeE = eTNomeEsame.text.toString()
 
-        var tVDaTa = findViewById<TextView>(R.id.tVDataM)
+        val tVDaTa = findViewById<TextView>(R.id.tVDataM)
         val dataE = tVDaTa.text.toString()
 
-        var tVOra = findViewById<TextView>(R.id.tVOraM)
+        val tVOra = findViewById<TextView>(R.id.tVOraM)
         val oraE = tVOra.text.toString()
 
         //Aggiornamento DB con nuovi valori

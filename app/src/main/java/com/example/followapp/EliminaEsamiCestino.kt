@@ -21,9 +21,9 @@ class EliminaEsamiCestino : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_elimina_esami_cestino)
 
-        var nomeE = findViewById<TextView>(R.id.eTNomeEsameM)
-        var dataE = findViewById<TextView>(R.id.tVDataM)
-        var oraE = findViewById<TextView>(R.id.tVOraM)
+        val nomeE = findViewById<TextView>(R.id.eTNomeEsameM)
+        val dataE = findViewById<TextView>(R.id.tVDataM)
+        val oraE = findViewById<TextView>(R.id.tVOraM)
 
         /**
          * Settaggio dati nell'activity

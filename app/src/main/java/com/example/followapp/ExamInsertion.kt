@@ -27,7 +27,7 @@ class ExamInsertion : AppCompatActivity() {
          * -- GESTIONE CALENDARIO --
          */
         //Crezione val per textView e inizializzazione per inserimento data
-        var tVDaTa = findViewById<TextView>(R.id.tVDataM)
+        val tVDaTa = findViewById<TextView>(R.id.tVDataM)
         //Calendario scelta data
         val calendario = Calendar.getInstance()
         val year = calendario.get(Calendar.YEAR)
@@ -61,7 +61,7 @@ class ExamInsertion : AppCompatActivity() {
         //Crezione val per textView e inizializzazione per inserimento ora
         val tVOrA = findViewById<TextView>(R.id.tVOraM)
         //Crezione bottone e inizializzazione per inserimento ora
-        var oraButton = findViewById<Button>(R.id.oraB)
+        val oraButton = findViewById<Button>(R.id.oraB)
         //Evento click oraB in cui viene aperto l'orologio
         oraButton.setOnClickListener {
             val oraCalendario = TimePickerDialog.OnTimeSetListener { TimePicker, mHour, mMinute ->
@@ -77,7 +77,7 @@ class ExamInsertion : AppCompatActivity() {
          * -- GESTIONE SALVATAGGIO --
          */
         //Crezione bottone e inizializzazione bottone salvaB
-        var salvataggioButton = findViewById<Button>(R.id.salvaB)
+        val salvataggioButton = findViewById<Button>(R.id.salvaB)
         //Evento click salvaB in cui vengono salvati i dati inserite dall'utente
         salvataggioButton.setOnClickListener {
             // Creazione messaggio allerta se dati non inseriti
@@ -106,13 +106,13 @@ class ExamInsertion : AppCompatActivity() {
      * Funzione per salvare i record degli esami nel DB.
      */
     private fun aggiungiRecord() {
-        var eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
+        val eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
         val nomeE = eTNomeEsame.text.toString()
 
-        var tVDaTa = findViewById<TextView>(R.id.tVDataM)
+        val tVDaTa = findViewById<TextView>(R.id.tVDataM)
         val dataE = tVDaTa.text.toString()
 
-        var tVOra = findViewById<TextView>(R.id.tVOraM)
+        val tVOra = findViewById<TextView>(R.id.tVOraM)
         val oraE = tVOra.text.toString()
 
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
