@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         viewExam()
 
         //Crezione bottone e inizializzazione PlusB
-        val PlusButton = findViewById<Button>(R.id.plusB)
+        val PlusButton = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         //Evento click PlusB in cui viene aperta l'activity ExamInsertion
         PlusButton.setOnClickListener {
             val intent = Intent(this, ExamInsertion::class.java)
