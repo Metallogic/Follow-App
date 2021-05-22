@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -37,7 +38,7 @@ class ExamInsertion : AppCompatActivity() {
         val dataButton = findViewById<Button>(R.id.dataB)
         //Evento click dataB in cui viene aperto il calendario
         dataButton.setOnClickListener {
-            val dataCalendario = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            val dataCalendario = DatePickerDialog(this, { view, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
                 var giorno: String = mDayOfMonth.toString()
                 val mesePlus1 = mMonth + 1
                 var mese: String = mesePlus1.toString()
@@ -50,6 +51,7 @@ class ExamInsertion : AppCompatActivity() {
                 tVDaTa.setText("" + mYear + "-" + mese + "-" + giorno)
                 }, year, month, day)
             dataCalendario.show()
+            //Visualizzazione Giorni mancanti all'esame
         }
 
 
@@ -158,9 +160,16 @@ class ExamInsertion : AppCompatActivity() {
                 return "$maxLength"
             }
         }
-
         return "OK"
+    }
 
+    fun checkExamName(v: View?) {
+        val eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
+        val nomeE = eTNomeEsame.text.toString()
+        if (nomeE.length >= 30) {
+            //Set messaggio di errore per nome inserito troppo lungo
+            eTNomeEsame.setError(getString(R.string.MaxNomeE))
+        }
     }
 
 }

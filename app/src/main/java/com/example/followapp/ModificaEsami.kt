@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -247,5 +248,14 @@ class ModificaEsami : AppCompatActivity() {
         }
 
         return "OK"
+    }
+
+    fun checkExamName(v: View?) {
+        val eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
+        val nomeE = eTNomeEsame.text.toString()
+        if (nomeE.length >= 30) {
+            //Set messaggio di errore per nome inserito troppo lungo
+            eTNomeEsame.setError(getString(R.string.MaxNomeE))
+        }
     }
 }

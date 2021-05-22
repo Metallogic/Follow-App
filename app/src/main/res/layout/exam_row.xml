@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         tools:text="-" />
@@ -79,9 +79,10 @@
             android:id="@+id/tVCountdownDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FB0000"
             android:gravity="center|center_horizontal|center_vertical"
             android:text="@string/day"
-            android:textColor="#E91E63"
+            android:textColor="#FFFFFF"
             android:textSize="36sp" />
 
         <TextView

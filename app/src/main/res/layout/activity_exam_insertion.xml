@@ -7,6 +7,22 @@
     android:padding="24dp"
     tools:context=".ExamInsertion">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <Button
         android:id="@+id/salvaB"
         android:layout_width="0dp"
@@ -66,6 +82,7 @@
                 android:ems="10"
                 android:hint="inserire nome esame (MAX 30 caratteri)"
                 android:inputType="textPersonName"
+                android:onClick="checkExamName"
                 android:textAlignment="textStart" />
         </LinearLayout>
 

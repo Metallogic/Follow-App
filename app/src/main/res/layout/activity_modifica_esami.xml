@@ -93,6 +93,7 @@
                 android:layout_height="match_parent"
                 android:hint="inserire nome esame"
                 android:inputType="textPersonName"
+                android:onClick="checkExamName"
                 android:textAlignment="textStart" />
         </LinearLayout>
 
