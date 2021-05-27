@@ -23,8 +23,6 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
         val tVoraEsame: TextView
         val tVCdD: TextView //TextView Countdown Day
         val tVBar1: TextView
-        val tVBar2: TextView
-        val tVBar3: TextView
 
         //Inizializzazione
         init {
@@ -34,8 +32,6 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
             tVoraEsame = itemView.findViewById(R.id.tVoraEsameRow)
             tVCdD = itemView.findViewById(R.id.tVCountdownDay)
             tVBar1 = itemView.findViewById(R.id.tVbar1)
-            tVBar2 = itemView.findViewById(R.id.tVbar2)
-            tVBar3 = itemView.findViewById(R.id.tVbar3)
         }
     }
 
@@ -58,8 +54,7 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
         holder.tVdataEsame.text = dataEsame
         holder.tVoraEsame.text = esame.oraEsame
         holder.tVBar1.text = "-"
-        holder.tVBar2.text = "-"
-        holder.tVBar3.text = "-"
+
 
         //Richiamo funzione readCountdown che torna dall'id dell'esame il numero di gironi che mancano a questo ultimo
         val getID: Int? = esame.id

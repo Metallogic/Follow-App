@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Follow App</string>
     <string name="esame_inserito_toast">ESAME INSERITO</string>
+    <string name="impostazioni">Impostazioni</string>
     <string name="esame_modificato_toast">ESAME MODIFICATO</string>
     <string name="esame_cestinato_toast">ESAME CESTINATO</string>
     <string name="esame_eliminato_toast">ESAME ELIMINATO</string>
@@ -32,5 +33,12 @@
     <string name="inserire_nome_esame_max_30_caratteri">inserire nome esame (MAX 30 caratteri)</string>
     <string name="ripristina_esame">RIPRISTINA ESAME</string>
     <string name="textview" translatable="false">TextView</string>
+    <string name="nuovo_esame">Nuovo esame</string>
+    <string name="archivio">Archivio</string>
     <string name="cestino">Cestino</string>
+    <string name="italianoB">Italiano</string>
+    <string name="ingleseB">Inglese</string>
+    <string name="lingua">Seleziona lingua</string>
+    <string name="lingua_cambiataIT">Lingua cambiata</string>
+    <string name="lingua_cambiataEN">Changed language</string>
 </resources>

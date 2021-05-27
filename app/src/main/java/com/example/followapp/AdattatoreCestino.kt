@@ -24,8 +24,6 @@ class trashAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recyc
         val tVoraEsame: TextView
         val tVCdD: TextView //TextView Countdown Day
         val tVBar1: TextView
-        val tVBar2: TextView
-        val tVBar3: TextView
 
         //Inizializzazione
         init {
@@ -35,8 +33,6 @@ class trashAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recyc
             tVoraEsame = itemView.findViewById(R.id.tVoraEsameRow)
             tVCdD = itemView.findViewById(R.id.tVCountdownDay)
             tVBar1 = itemView.findViewById(R.id.tVbar1)
-            tVBar2 = itemView.findViewById(R.id.tVbar2)
-            tVBar3 = itemView.findViewById(R.id.tVbar3)
         }
     }
 
@@ -57,8 +53,6 @@ class trashAdapter (val exam: ArrayList<ModelExam>, val context: Context): Recyc
         holder.tVdataEsame.text = dataEsame
         holder.tVoraEsame.text = esame.oraEsame
         holder.tVBar1.text = "-"
-        holder.tVBar2.text = "-"
-        holder.tVBar3.text = "-"
 
         //Richiamo funzione readCountdown che torna dall'id dell'esame il numero di gironi che mancano a questo ultimo
         val getID: Int? = esame.id

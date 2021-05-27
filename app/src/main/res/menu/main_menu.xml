@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuNuovoEsame"
-        android:title="Nuovo esame" />
+        android:title="@string/nuovo_esame" />
     <item
         android:id="@+id/menuArchivio"
-        android:title="Archivio" />
+        android:title="@string/archivio" />
     <item
         android:id="@+id/menuCestino"
-        android:title="Cestino" />
+        android:title="@string/cestino" />
 </menu>

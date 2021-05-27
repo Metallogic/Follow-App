@@ -28,4 +28,12 @@
     <string name="inserire_nome_esame_max_30_caratteri">enter exam name (MAX 30 characters)</string>
     <string name="ripristina_esame">RESET EXAM</string>
     <string name="cestino">Trash</string>
+    <string name="impostazioni">Settings</string>
+    <string name="nuovo_esame">New exam</string>
+    <string name="archivio">Archive</string>
+    <string name="italianoB">Italian</string>
+    <string name="ingleseB">English</string>
+    <string name="lingua">Language selection</string>
+    <string name="lingua_cambiataEN">Changed language</string>
+    <string name="lingua_cambiataIT">Lingua cambiata</string>
 </resources>

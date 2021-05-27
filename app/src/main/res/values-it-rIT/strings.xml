@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="esame_inserito_toast">ESAME INSERITO</string>
+    <string name="impostazioni">Impostazioni</string>
+    <string name="esame_modificato_toast">ESAME MODIFICATO</string>
+    <string name="esame_cestinato_toast">ESAME CESTINATO</string>
+    <string name="esame_eliminato_toast">ESAME ELIMINATO</string>
+    <string name="errore_esame">ESAME NON MODIFICATO O CANCELLATO</string>
+    <string name="esame_ripristinato">ESAME RIPRISTINATO</string>
+    <string name="operazione_annullata">OPERAZIONE ANNULLATA</string>
+    <string name="ora">Ora</string>
+    <string name="old_exam">ARCHIVIO</string>
+    <string name="giorni_mancanti">Giorni mancanti</string>
+    <string name="MaxNomeE">Max 30 caratteri</string>
+    <string name="nome_esame">Nome Esame -</string>
+    <string name="data_esame">DATA ESAME</string>
+    <string name="ora_esame">ORA ESAME</string>
+    <string name="annulla">ANNULLA</string>
+    <string name="modifica_dati_esame">Modifica dati esame</string>
+    <string name="salva_modifiche">SALVA MODIFICHE</string>
+    <string name="inserire_nome_esame">inserire nome esame</string>
+    <string name="data">DATA</string>
+    <string name="giorni_mancanti_all_esame">Giorni mancanti all\'esame</string>
+    <string name="archivio_esami">Archivio esami</string>
+    <string name="salva">SALVA</string>
+    <string name="inserire_dati_esame">Inserire dati esame</string>
+    <string name="inserire_nome_esame_max_30_caratteri">inserire nome esame (MAX 30 caratteri)</string>
+    <string name="ripristina_esame">RIPRISTINA ESAME</string>
+    <string name="nuovo_esame">Nuovo esame</string>
+    <string name="archivio">Archivio</string>
+    <string name="cestino">Cestino</string>
+    <string name="italianoB">Italiano</string>
+    <string name="ingleseB">Inglese</string>
+    <string name="lingua">Seleziona lingua</string>
+    <string name="lingua_cambiataEN">Changed language</string>
+    <string name="lingua_cambiataIT">Lingua cambiata</string>
+    <string name="dati_esame">Dati esame</string>
+    <string name="cancella_esame">CANCELLA ESAME</string>
+</resources>
