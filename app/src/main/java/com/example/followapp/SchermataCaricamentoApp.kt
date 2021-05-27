@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatDelegate
 
 /**
  * Classe che mostra logo caricamento app al'avvio dell'app
  */
 class SchermataCaricamentoApp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        //disattivazione tema scuro
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schermata_caricamento_app)
 
