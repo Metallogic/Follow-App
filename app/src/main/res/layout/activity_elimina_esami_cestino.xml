@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#9C27B0"
-            android:text="ANNULLA"
+            android:text="@string/annulla"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:weightSum="1" />
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#8BDF36"
-            android:text="RIPRISTINA ESAME"
+            android:text="@string/ripristina_esame"
             android:textSize="24sp" />
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FF2B1B"
-            android:text="CANCELLA ESAME"
+            android:text="@string/cancella_esame"
             android:textSize="24sp"
             android:weightSum="1" />
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:id="@+id/tVTitolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dati esame"
+            android:text="@string/dati_esame"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
@@ -68,7 +68,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-"
+            android:text="@string/space"
             android:textAlignment="center"
             android:textSize="14sp" />
 
@@ -82,17 +82,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Nome Esame - "
+                android:text="@string/nome_esame"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/eTNomeEsameM"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -102,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00BCD4"
-            android:text="DATA ESAME" />
+            android:text="@string/data_esame" />
 
         <TextView
             android:id="@+id/tVDataM"
@@ -116,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00BCD4"
-            android:text="ORA ESAME" />
+            android:text="@string/ora_esame" />
 
         <TextView
             android:id="@+id/tVOraM"

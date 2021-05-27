@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="esame_inserito_toast">EXAM ENTERED</string>
+    <string name="esame_modificato_toast">CHANGED EXAM</string>
+    <string name="esame_cestinato_toast">BIN EXAMINATION</string>
+    <string name="esame_eliminato_toast">EXAM ELIMINATED</string>
+    <string name="errore_esame">EXAM NOT MODIFIED OR CANCELED</string>
+    <string name="esame_ripristinato">EXAM RESTORED</string>
+    <string name="operazione_annullata">OPERATION CANCELED</string>
+    <string name="ora">Hour</string>
+    <string name="old_exam">ARCHIVE</string>
+    <string name="giorni_mancanti">Day left</string>
+    <string name="MaxNomeE">Max 30 characters</string>
+    <string name="annulla">CANCEL</string>
+    <string name="dati_esame">Exam data</string>
+    <string name="cancella_esame">CANCEL EXAM</string>
+    <string name="nome_esame">Exam name -</string>
+    <string name="data_esame">EXAM DATE</string>
+    <string name="ora_esame">EXAM TIME</string>
+    <string name="modifica_dati_esame">Edit exam data</string>
+    <string name="salva_modifiche">SAVE CHANGES</string>
+    <string name="inserire_nome_esame">enter exam name</string>
+    <string name="data">DATE</string>
+    <string name="giorni_mancanti_all_esame">Exam day countdown</string>
+    <string name="archivio_esami">Exams archive</string>
+    <string name="salva">SAVE</string>
+    <string name="inserire_dati_esame">Enter exam data</string>
+    <string name="inserire_nome_esame_max_30_caratteri">enter exam name (MAX 30 characters)</string>
+    <string name="ripristina_esame">RESET EXAM</string>
+    <string name="cestino">Trash</string>
+</resources>

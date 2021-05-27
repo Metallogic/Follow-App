@@ -11,7 +11,7 @@
         android:id="@+id/tVbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cestino"
+        android:text="@string/cestino"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="24sp"
