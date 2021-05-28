@@ -138,7 +138,7 @@ class ModificaEsami : AppCompatActivity() {
             messaggioAllerta.setPositiveButton(getString(R.string.OK)) { dialog, id, ->
                 dialog.dismiss()
             }
-            //Controllo dati inseriti, se incompleti messagio di errore, altrimenti toast di salvataggio andato a buon fine
+            //Controllo dati inseriti, se incompleti messagio di errore, altrimenti creazione toast di salvataggio andato a buon fine
             val msg= checkDati(nomeE.getText().toString(),dataE.getText().toString(),oraE.getText().toString(),)
             //Inserimento dati nel DB e Toast di avvenuto inserimento esame
             if(msg.equals("OK")){
