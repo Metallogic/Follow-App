@@ -46,4 +46,5 @@
     <string name="dati_incompleti">Dati inseriti incompleti!</string>
     <string name="sicuro_eliminare_msg">Sicuro di voler eliminare l\'esame?</string>
     <string name="esame_passato">Fatto</string>
+    <string name="inserire_ora_maggiore">Inserire ora maggiore o uguale all\'attuale</string>
 </resources>

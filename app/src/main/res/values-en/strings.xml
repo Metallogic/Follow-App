@@ -46,4 +46,5 @@
     <string name="dati_incompleti">Incomplete data entered!</string>
     <string name="sicuro_eliminare_msg">Are you sure you want to delete the exam?</string>
     <string name="esame_passato">Done</string>
+    <string name="inserire_ora_maggiore">Enter time greater than or equal to the current one</string>
 </resources>
