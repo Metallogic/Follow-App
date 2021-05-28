@@ -231,6 +231,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
         var nomeE: String
         var dataE: String
         var oraE: String
+        var cestinoE: String
 
         if (cursore.moveToFirst()) {
             do {
@@ -238,11 +239,19 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 nomeE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_NOMESAME))
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
+                cestinoE = cursore.getString(cursore.getColumnIndex(COLUMN_CESTINO))
 
                 //Inserimento solo esami con data > alla data attuale
-                if (dataE < data){
-                    val exam = ModelExam(id = idE, nomeEsame = nomeE, dataEsame = dataE, oraEsame = oraE)
-                    listaEsami.add(exam)
+                if (!cestinoE.equals("c")) {
+                    if (dataE < data) {
+                        val exam = ModelExam(
+                            id = idE,
+                            nomeEsame = nomeE,
+                            dataEsame = dataE,
+                            oraEsame = oraE
+                        )
+                        listaEsami.add(exam)
+                    }
                 }
             } while (cursore.moveToNext())
         }
@@ -281,7 +290,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                 dataE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_DATA))
                 oraE = cursore.getString(cursore.getColumnIndex(COLUMN_NAME_ORA))
                 cestinoE = cursore.getString(cursore.getColumnIndex(COLUMN_CESTINO))
-
 
                 //Inserimento solo esami con data > alla data attuale
                 if (cestinoE.equals("c")) {

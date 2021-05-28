@@ -77,6 +77,7 @@ class ModificaEsamiOld : AppCompatActivity() {
         }
     }
 
+
     /**
      * Funzione che permette l'eliminazione della riga relativa all'esame in oggetto
      */
