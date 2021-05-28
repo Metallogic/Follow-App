@@ -84,15 +84,16 @@ class ExamInsertion : AppCompatActivity() {
         salvataggioButton.setOnClickListener {
             // Creazione messaggio allerta se dati non inseriti
             val messaggioAllerta = AlertDialog.Builder(this@ExamInsertion)
-            messaggioAllerta.setTitle("ATTENZIONE")
-            messaggioAllerta.setMessage("Dati inseriti incompleti!")
-            messaggioAllerta.setPositiveButton("OK") { dialog, id, ->
+            messaggioAllerta.setTitle(getString(R.string.attenzione_msg))
+            messaggioAllerta.setMessage(getString(R.string.dati_incompleti))
+            messaggioAllerta.setPositiveButton(getString(R.string.OK)) { dialog, id, ->
                 dialog.dismiss()
             }
             //Controllo dati inseriti, se incompleti messagio di errore, altrimenti toast di salvataggio andato a buon fine
+
             val msg= checkDati(eTNomeEsame.getText().toString(),tVDaTa.getText().toString(),tVOrA.getText().toString(),)
             //Inserimento dati nel DB e Toast di avvenuto inserimento esame
-            if(msg.equals("OK")){
+            if(msg.equals(getString(R.string.OK))){
                 aggiungiRecord()
                 //Chiusura activity
                 finish()
@@ -128,41 +129,33 @@ class ExamInsertion : AppCompatActivity() {
      * Funzione che controlla i dati inseriti dall'utente e verifica che non abbia lasciato record vuoti
      */
     fun checkDati(nome: String, data: String, ora: String) : String {
-        val maxLength = "Nome esame troppo lungo (MAX 30 caratteri)"
-        if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
-            if (nome.length >= 30) {
-                return "Inserire data esame +\n + $maxLength"
-            } else {
-                return "Inserire data esame"
-            }
-        } else if ((nome.isNotEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
-            if (nome.length >= 30) {
-                return "Inserire data e ora esame \n$maxLength"
-            } else {
-                return "Inserire data e ora esame"
-            }
-        } else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isEmpty())) {
-            return "Inserire nome, data e ora esame"
-        } else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
-            return "Inserire nome esame"
-        } else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
-            if (nome.length >= 30) {
-                return "Inserire data esame +\n + $maxLength"
-            } else {
-                return "Inserire ora esame"
-            }
-        } else if ((nome.isEmpty()) and (data.isNotEmpty()) and (ora.isEmpty())) {
-            return "Inserire nome e ora esame"
-        } else if ((nome.isEmpty()) and (data.isEmpty()) and (ora.isNotEmpty())) {
-            return "Inserire nome e data esame"
-        } else if ((nome.isNotEmpty()) and (data.isNotEmpty()) and (ora.isNotEmpty())) {
-            if (nome.length >= 30) {
-                return "$maxLength"
-            }
+        var errMsg = ""
+
+        if (checkInsertName(nome)!=true){
+            errMsg += "\n" + getString(R.string.inserire_nomeE)
+        }
+        if (checkInsertData(data)!=true){
+            errMsg += "\n" + getString(R.string.inserire_dataE)
+        }
+        if (checkInsertOra(ora)!=true){
+            errMsg += "\n" + getString(R.string.inserire_oraE)
+        }
+        if (checkLengthNome(nome)!=true){
+            errMsg += "\n" + getString(R.string.inserire_nome_esame_max_30_caratteri)
+        }
+        if (checkData(data)!=true){
+            errMsg += "\n" + getString(R.string.inserire_data_maggiore)
+        }
+
+        if (!errMsg.equals("")){
+            return errMsg
         }
         return "OK"
     }
 
+    /**
+     * Funzione che controlla la lunghezza massima del nome esame inserito nella view
+     */
     fun checkExamName(v: View?) {
         val eTNomeEsame = findViewById<TextView>(R.id.eTNomeEsameM)
         val nomeE = eTNomeEsame.text.toString()
@@ -172,6 +165,85 @@ class ExamInsertion : AppCompatActivity() {
         }
     }
 
+    /**
+     * Funzione che controlla se si è inserita una data
+     */
+    fun checkInsertData(dataE: String): Boolean {
+        if (dataE.isNotEmpty()) {
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Funzione che controlla se si è dato un nome all'esame
+     */
+    fun checkInsertName(nomeE: String): Boolean {
+        if (nomeE.isNotEmpty()) {
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Funzione che controlla se si è inserita un'ora
+     */
+    fun checkInsertOra(oraE: String): Boolean {
+        if (oraE.isNotEmpty()) {
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Funzione che controlla la lunghezza max del nome esame inserito
+     */
+    fun checkLengthNome(nomeE: String): Boolean{
+        if (nomeE.length <= 30) {
+            return true
+        }
+        return false
+    }
+
+
+    /**
+     * Funzione che controlla che la data inserita dall'uenete in fase di inserimento di un nuovo esame,
+     * sia maggiore o uguale della data attuale
+     */
+    fun checkData(dataE: String): Boolean {
+        //Lettura data attuale
+        val dataAttuale = Calendar.getInstance().time
+        val df = SimpleDateFormat("yyyy-MM-dd")
+        val dataAttualeFormattata = df.format(dataAttuale)
+
+        if (dataE.isNotEmpty()){
+            //Scomposizione data Esame
+            val annoE = dataE.subSequence(0, 4).toString()
+            val meseE = dataE.subSequence(5, 7).toString()
+            val giornoE = dataE.subSequence(8, 10).toString()
+            //Scomposizione data Esame
+            val annoA = dataAttualeFormattata.subSequence(0, 4).toString()
+            val meseA = dataAttualeFormattata.subSequence(5, 7).toString()
+            val giornoA = dataAttualeFormattata.subSequence(8, 10).toString()
+
+            if (annoE.toInt() > annoA.toInt()) {
+                return true
+            }
+            if (annoE.toInt() == annoA.toInt()) {
+                if (meseE.toInt() > meseA.toInt()) {
+                    return true
+                }
+            }
+            if (annoE.toInt() == annoA.toInt()) {
+                if (meseE.toInt() == meseA.toInt()) {
+                    if (giornoE.toInt() >= giornoA.toInt()) {
+                        return true //data >= dell'attuale
+                    }
+                }
+            }
+        }
+        return false //data < dell'attuale
+    }
 }
 
 

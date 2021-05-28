@@ -25,7 +25,7 @@
     <string name="archivio_esami">Exams archive</string>
     <string name="salva">SAVE</string>
     <string name="inserire_dati_esame">Enter exam data</string>
-    <string name="inserire_nome_esame_max_30_caratteri">enter exam name (MAX 30 characters)</string>
+    <string name="inserire_nome_esame_max_30_caratteri">Enter exam name (MAX 30 characters)</string>
     <string name="ripristina_esame">RESET EXAM</string>
     <string name="cestino">Trash</string>
     <string name="impostazioni">Settings</string>
@@ -36,4 +36,14 @@
     <string name="lingua">Language selection</string>
     <string name="lingua_cambiataEN">Changed language</string>
     <string name="lingua_cambiataIT">Lingua cambiata</string>
+    <string name="inserire_nomeE">Enter exam name</string>
+    <string name="inserire_dataE">Enter exam date</string>
+    <string name="inserire_oraE">Enter ezam hour</string>
+    <string name="inserire_data_maggiore">Insert date greater than current</string>
+    <string name="attenzione_msg">WARNING</string>
+    <string name="sicuro_modifiche_msg">Are you sure you want to make changes to the exam?</string>
+    <string name="SI">YES</string>
+    <string name="dati_incompleti">Incomplete data entered!</string>
+    <string name="sicuro_eliminare_msg">Are you sure you want to delete the exam?</string>
+    <string name="esame_passato">Done</string>
 </resources>

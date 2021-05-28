@@ -41,4 +41,16 @@
     <string name="lingua">Seleziona lingua</string>
     <string name="lingua_cambiataIT">Lingua cambiata</string>
     <string name="lingua_cambiataEN">Changed language</string>
+    <string name="inserire_nomeE">Inserire nome esame</string>
+    <string name="inserire_dataE">Inserire data esame</string>
+    <string name="inserire_oraE">Inserire ora esame</string>
+    <string name="inserire_data_maggiore">Inserire data maggiore o uguale all\'attuale</string>
+    <string name="attenzione_msg">ATTENZIONE</string>
+    <string name="sicuro_modifiche_msg">Sicuro di voler apportare le modifiche all\'esame?</string>
+    <string name="sicuro_eliminare_msg">Sicuro di voler eliminare l\'esame?</string>
+    <string name="SI">SI</string>
+    <string name="NO" translatable="false">NO</string>
+    <string name="dati_incompleti" >Dati inseriti incompleti!</string>
+    <string name="OK" translatable="false">OK</string>
+    <string name="esame_passato">Fatto</string>
 </resources>

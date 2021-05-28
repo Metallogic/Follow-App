@@ -55,11 +55,7 @@ class oldExamAdapter (val exam: ArrayList<ModelExam>, val context: Context): Rec
         holder.tVoraEsame.text = esame.oraEsame
         holder.tVBar1.text = "-"
 
-
-        //Richiamo funzione readCountdown che torna dall'id dell'esame il numero di gironi che mancano a questo ultimo
-        val getID: Int? = esame.id
-        val numGiorni = MainActivity.dbHandler.readCountdown(getID!!)
-        holder.tVCdD.text = numGiorni.toString()
+        holder.tVCdD.text = "/"
 
         //Al click dell'oggetto esame vengono passati i valori tramite intent all'activity MpdificaEsamiOld.kt
         holder.itemView.setOnClickListener {

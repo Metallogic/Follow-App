@@ -59,14 +59,14 @@ class ModificaEsamiOld : AppCompatActivity() {
          */
         //Avviso di sicurezza
         val avvisoD = AlertDialog.Builder(this)
-        avvisoD.setTitle("ATTENZIONE")
-        avvisoD.setMessage("Sicuro di voler eliminare l'esame?")
-        avvisoD.setPositiveButton("SI") { _, _ ->
+        avvisoD.setTitle(getString(R.string.attenzione_msg))
+        avvisoD.setMessage(getString(R.string.sicuro_eliminare_msg))
+        avvisoD.setPositiveButton(getString(R.string.SI)) { _, _ ->
             //Chiamata funzione per eliminare l'esame e aggiornare lo stato del DB
             eliminaRiga(idEsame)
             finish()
         }
-        avvisoD.setNegativeButton("NO") { _, _ ->
+        avvisoD.setNegativeButton(getString(R.string.NO)) { _, _ ->
             //linea vuota, la finiestra di dialogo si chiude
         }
         //Crezione bottone e inizializzazione deleteB
