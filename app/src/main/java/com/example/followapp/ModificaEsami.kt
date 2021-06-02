@@ -231,6 +231,9 @@ class ModificaEsami : AppCompatActivity() {
         if (checkData(data)!=true){
             errMsg += "\n" + getString(R.string.inserire_data_maggiore)
         }
+        if (checkOra(data, ora)!=true){
+            errMsg += "\n" + getString(R.string.inserire_ora_maggiore)
+        }
 
         if (!errMsg.equals("")){
             return errMsg
@@ -320,5 +323,60 @@ class ModificaEsami : AppCompatActivity() {
             }
         }
         return false //data < dell'attuale
+    }
+
+    /**
+     * Funzione che controlla che l'ora inserita dall'utente in fase di inserimento di un nuovo esame,
+     * sia maggiore o uguale dell'ora attuale
+     */
+    fun checkOra(dataE: String, oraE: String): Boolean {
+        //Lettura data attuale
+        val oraAttuale = Calendar.getInstance().time
+        val oraDf = SimpleDateFormat("HH:mm")
+        val oraAttualeFormattata = oraDf.format(oraAttuale)
+        //Lettura data attuale
+        val dataAttuale = Calendar.getInstance().time
+        val dataDf = SimpleDateFormat("yyyy-MM-dd")
+        val dataAttualeFormattata = dataDf.format(dataAttuale)
+
+        if (oraE.isNotEmpty() && dataE.isNotEmpty()) {
+            //Scomposizione data Esame
+            val annoE = dataE.subSequence(0, 4).toString()
+            val meseE = dataE.subSequence(5, 7).toString()
+            val giornoE = dataE.subSequence(8, 10).toString()
+            //Scomposizione data attuale
+            val annoA = dataAttualeFormattata.subSequence(0, 4).toString()
+            val meseA = dataAttualeFormattata.subSequence(5, 7).toString()
+            val giornoA = dataAttualeFormattata.subSequence(8, 10).toString()
+            //Scomposizione ora Esame
+            val oRaE = oraE.subSequence(0, 2).toString()
+            val minE = oraE.subSequence(3, 5).toString()
+            //Scomposizione ora attuale
+            val oraA = oraAttualeFormattata.subSequence(0, 2).toString()
+            val minA = oraAttualeFormattata.subSequence(3, 5).toString()
+
+            if (annoE.toInt() == annoA.toInt()) {
+                if (meseE.toInt() == meseA.toInt()) {
+                    if (giornoE.toInt() == giornoA.toInt()) {
+                        if (oRaE.toInt() > oraA.toInt()) {
+                            return true
+                        }
+                    }
+                }
+            }
+            if (annoE.toInt() == annoA.toInt()) {
+                if (meseE.toInt() == meseA.toInt()) {
+                    if (giornoE.toInt() == giornoA.toInt()) {
+                        if (oRaE.toInt() == oraA.toInt()) {
+                            if (minE.toInt() >= minA.toInt()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            else return false
+        }
+        return false //ora < dell'attuale
     }
 }

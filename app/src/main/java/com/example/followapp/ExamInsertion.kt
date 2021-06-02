@@ -298,8 +298,9 @@ class ExamInsertion : AppCompatActivity() {
                     }
                 }
             }
+            else return false
         }
-        return false //data < dell'attuale
+        return false //ora < dell'attuale
     }
 }
 
